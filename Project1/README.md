@@ -13,10 +13,10 @@ Julia has a fantastic package manager for installing and updating add-on package
 
 Now we're ready to run Oceananigans! 🙌 To do this:
 1. In the Explorer window of VS Code, navigate into the Project1 directory. If you don't see the FDSE folder, you can open it from GitHub Desktop using the Repository menu and selecting "Open in Visual Studio Code"
-2. Double click on gravitycurrent.jl
-3. Run the script by clicking on the right-pointing triangle to the right above the gravitycurrent.jl window
+2. Double click on `gravitycurrent.jl`
+3. Run the script by clicking on the right-pointing triangle to the right above the `gravitycurrent.jl` window
 
-The model will run for 20 time units and print messages so that you can keep track of the progress. You can stop the model running at any time by pressing CONTROL-C, but if it isn't too slow, let the run finish. At the end of the simulation, the script will call plot_gravitycurrent.jl which will create a movie of the output called "gravitycurrent.mp4". You should be able to open and view this movie in VS code, or you can open it with a movie player of your choice. A figure should also appear which shows the buoyancy evaluated at the bottom of the model domain as a function of distance in the x-direction and time.
+The model will run for 20 time units and print messages so that you can keep track of the progress. You can stop the model running at any time by pressing CONTROL-C, but if it isn't too slow, let the run finish. At the end of the simulation, the script will call `plot_gravitycurrent.jl` which will create a movie of the output called `gravitycurrent.mp4`. You should be able to open and view this movie in VS code, or you can open it with a movie player of your choice. A figure should also appear which shows the buoyancy evaluated at the bottom of the model domain as a function of distance in the x-direction and time.
 
 Now that the code is running, we're ready to do some science! 🧪
 
@@ -31,14 +31,14 @@ where $\mathbf{u}=(u,v,w)$ is the velocity vector and $\nabla=(\partial/\partial
 $$Re\equiv \frac{U_0 L}{\nu} \quad \mbox{and} \quad Pr\equiv \frac{\nu}{\kappa},$$
 and $\nu$ and $\kappa$ are the kinematic viscosity and molecular diffusivity, respectively. 
 
-Have a look at gravitycurrent.jl.  It is extensively commented which should help you understand what is happening
+Have a look at `gravitycurrent.jl`.  It is extensively commented which should help you understand what is happening
 
 Oceananigans scripts have several standard components:
 1. Load any packages that will be needed in the script
 2. Set the parameters that will be used for the model run
 3. Build a model grid
 4. Set the boundary and initial conditions
-5. Create 'model' and 'simulation' objects
+5. Create `model` and `simulation` objects
 6. Define callbacks to call functions periodically durind the simulation
 7. Run the model
 8. Process and plot the output
@@ -52,22 +52,22 @@ You can stop a simulation at any time by pressing CONTROL-C.  If you do this, th
 Now, let's do some science and explore the dynamics of gravity currents using Oceananigans
 
 Gravity currents develop when dense fluid flows beneath light fluid under the effect of gravity.
-The image below shows a dramatic example of a gravity current known as a `haboob' where sand and dust is picked up by strong winds associated with a weather front.
+The image below shows a dramatic example of a gravity current known as a 'haboob' where sand and dust is picked up by strong winds associated with a weather front.
 ![Haboob](./images/haboob-arizona-august-2020.png)
 
-A simple way to model gravity currents is using a `lock-exchange' flow. In the laboratory, dense fluid would be separated from light fluid by a vertical barrier. After the barrier is removed, the dense fluid will flow along the bottom of the tank with a height $H$. 
+A simple way to model gravity currents is using a 'lock-exchange' flow. In the laboratory, dense fluid would be separated from light fluid by a vertical barrier. After the barrier is removed, the dense fluid will flow along the bottom of the tank with a height $H$. [Shin et al.](./papers/ShinDalzielLinden.pdf) discuss laboratory experiments of gravity currents arising from the 'lock-exchange' problem.
 
 We can simulate the lock-exchange problem by initializing the buoyancy using the step-like $tanh$ function. The initial velocity is typically zero, but we might want to add some small random noise to the velocity field to helpk trigger turbuelence.
 
-In gravitycurrent.jl, the equations are non-dimensionalized using the vertical domain height and the change in buoyancy, $\Delta b=-g \Delta \rho / \rho_0$, where $\Delta \rho$ characterizes the initial density jump. The domain size is 10 non-dimensional units in the $x$-direction and 1 unit (by definition) in the $z$-direction. The Reynolds and Prandtl numbers are set to 5000 and 1, respectively, and we use $Nx=256$ and $Nz=32$ gridpoints in the x and z directions, respectively. You might want to take some time to change these parameters to get a feel for the flow and for how the model performs. 
+In `gravitycurrent.jl`, the equations are non-dimensionalized using the vertical domain height and the change in buoyancy, $\Delta b=-g \Delta \rho / \rho_0$, where $\Delta \rho$ characterizes the initial density jump. The domain size is 10 non-dimensional units in the $x$-direction and 1 unit (by definition) in the $z$-direction. The Reynolds and Prandtl numbers are set to 5000 and 1, respectively, and we use $Nx=256$ and $Nz=32$ gridpoints in the x and z directions, respectively. You might want to take some time to change these parameters to get a feel for the flow and for how the model performs. 
 
 Based on scaling arguments, a semi-infinite gravity current should propagate at a speed U, where
 $$U \sim \sqrt{\Delta b H}$$,
-$\Delta b$ is the buoyancy difference between the gravity current and the ambient fluid, and $H$ is the gravity current height. Try running gravitycurrent.jl for several different values of $\Delta b$, and calculate the propagation speed in each case. Does the scaling law hold? Can you think of ways to test this relation quantitatively?
+$\Delta b$ is the buoyancy difference between the gravity current and the ambient fluid, and $H$ is the gravity current height. Try running `gravitycurrent.jl` for several different values of $\Delta b$, and calculate the propagation speed in each case. Does the scaling law hold? Can you think of ways to test this relation quantitatively?
 
 # Suggested further investigations
 
-Each project will have some suggestions for further investigations at the end. Don't worry if you don't have time to do these. In the last computing session, your group will have time to do some of these futher investigations (or think of your own!) and make a presentation to show to the group on the final day of the summer school. These extensions will require some modification to gravitycurrent.jl, and you might want to copy and rename that script before you start editing.
+Each project will have some suggestions for further investigations at the end. Don't worry if you don't have time to do these. In the last computing session, your group will have time to do some of these futher investigations (or think of your own!) and make a presentation to show to the group on the final day of the summer school. These extensions will require some modification to `gravitycurrent.jl`, and you might want to copy and rename that script before you start editing.
 
 ## Colliding gravity currents
 
