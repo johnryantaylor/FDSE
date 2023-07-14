@@ -4,15 +4,15 @@
 using Oceananigans, JLD2, Plots, Printf
 
 # Set the filename (without the extension)
-filename="gravitycurrent"
+filename = "gravitycurrent"
 
 # Read in the first iteration.  We do this to load the grid
 # filename * ".jld2" concatenates the extension to the end of the filename
-u_ic=FieldTimeSeries(filename * ".jld2","u",iterations = 0)
-v_ic=FieldTimeSeries(filename * ".jld2","v",iterations = 0)
-w_ic=FieldTimeSeries(filename * ".jld2","w",iterations = 0)
-b_ic=FieldTimeSeries(filename * ".jld2","b",iterations = 0)
-c_ic=FieldTimeSeries(filename * ".jld2","c",iterations = 0)
+u_ic = FieldTimeSeries(filename * ".jld2", "u", iterations = 0)
+v_ic = FieldTimeSeries(filename * ".jld2", "v", iterations = 0)
+w_ic = FieldTimeSeries(filename * ".jld2", "w", iterations = 0)
+b_ic = FieldTimeSeries(filename * ".jld2", "b", iterations = 0)
+c_ic = FieldTimeSeries(filename * ".jld2", "c", iterations = 0)
 
 ## Load in coordinate arrays
 ## We do this separately for each variable since Oceananigans uses a staggered grid
@@ -30,8 +30,8 @@ iterations = parse.(Int, keys(file_xz["timeseries/t"]))
 
 @info "Making an animation from saved data..."
 
-t_save=zeros(length(iterations))
-b_bottom=zeros(length(b_ic[:,1,1]),length(iterations))
+t_save = zeros(length(iterations))
+b_bottom = zeros(length(b_ic[:, 1, 1]), length(iterations))
 
 # Here, we loop over all iterations
 anim = @animate for (i, iter) in enumerate(iterations)
@@ -50,8 +50,8 @@ anim = @animate for (i, iter) in enumerate(iterations)
     t = file_xz["timeseries/t/$iter"];
 
     # Save some variables to plot at the end
-    b_bottom[:,i]=b_xz[:,1,1]; # This is the buouyancy along the bottom wall
-    t_save[i]=t # save the time
+    b_bottom[:,i] = b_xz[:, 1, 1]; # This is the buouyancy along the bottom wall
+    t_save[i] = t # save the time
 
         u_xz_plot = heatmap(xu, zu, u_xz'; color = :balance, xlabel = "x", ylabel = "z", aspect_ratio = :equal);  
         v_xz_plot = heatmap(xv, zv, v_xz'; color = :balance, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
@@ -66,8 +66,8 @@ anim = @animate for (i, iter) in enumerate(iterations)
     c_title = @sprintf("c (dye), t = %s", prettytime(t));
 
 # Combine the sub-plots into a single figure
-    plot(b_xz_plot, c_xz_plot, layout=(2, 1), size=(1600, 400),
-    title=[b_title c_title])
+    plot(b_xz_plot, c_xz_plot, layout = (2, 1), size = (1600, 400),
+    title = [b_title c_title])
 
     iter == iterations[end] && close(file_xz)
 end
