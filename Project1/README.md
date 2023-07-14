@@ -79,6 +79,7 @@ Try repeating the gravity current experiments, but start with a stable buoyancy 
 
 ## Gravity currents on a slope
 
+Oceananigans gives us control of the direction in which gravity points. By changing the angle of gravity in the (x,z) plane, we can use this to simulate a gravity current on a prograde or retrograde slope. In the parameters section of `gravitycurrent.jl` (or a copy of that script), edit the vector `upward_unit_vector` to tilt the computational domain and model gravity currents on a slope. Note that the plots that are made in `plot_gravitycurrent.jl` will be in a tilted reference frame aligned with the computational domain. You might want to try to rotate these plots to have gravity point down.
 
 
 
