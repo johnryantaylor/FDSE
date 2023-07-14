@@ -69,9 +69,11 @@ $\Delta b$ is the buoyancy difference between the gravity current and the ambien
 
 Each project will have some suggestions for further investigations at the end. Don't worry if you don't have time to do these. In the last computing session, your group will have time to do some of these futher investigations (or think of your own!) and make a presentation to show to the group on the final day of the summer school.
 
+## Colliding gravity currents
+
 ## Gravity currents in stable stratification
 
-Try repeating the gravity current experiments, but start with a stable buoyancy profile in the ambient fluid. Start out with a case where the density of the fluid to the left of the `lock' is equal to the densest fluid in the ambient. Can you detect internal waves propagating in the ambient fluid ahead of the gravity current? To do this, you may need to reduce the width of the lock or make the domain larger in $x$. It also might be helpful to create a second, passive tracer and use it to `dye' the fluid in the lock to track the gravity current. Try varying the density in the fluid in the lock in relation to the minimum and maximum buoyancy in the stratified ambient. For example, what happens when the lock fluid has the same density as the average of the ambient fluid?
+Try repeating the gravity current experiments, but start with a stable buoyancy profile in the ambient fluid. Start out with a case where the density of the fluid to the left of the 'lock' is equal to the densest fluid in the ambient. Can you detect internal waves propagating in the ambient fluid ahead of the gravity current? To do this, you may need to reduce the width of the lock or make the domain larger in $x$. It also might be helpful to create a second, passive tracer and use it to 'dye' the fluid in the lock to track the gravity current. Try varying the density in the fluid in the lock in relation to the minimum and maximum buoyancy in the stratified ambient. For example, what happens when the lock fluid has the same density as the average of the ambient fluid?
 
 ## Gravity currents on a slope
 
