@@ -71,7 +71,7 @@ Each project will have some suggestions for further investigations at the end. D
 
 ## Colliding gravity currents
 
-A sea breeze is another example of a gravity current. As the air over land heats up during the day it becomes less dense than air over cool ocean waters. The relative dense marine air then moves onto land in the form of a sea breeze. Over small land features (e.g. islands or penninsulas) sea breezes can propagate towards the center of the land mass from multiple sides and collide in the middle. This can generate vigorous updrafts and rain. [Shin et al.](./papers/ShinDalzielLinden.pdf) used laboratory experiments to study this pheonomenon. Try reproducing this phenomena in Oceananigans. Can you predict the maximum height that the gravity currents can reach after they collide using an energy argument? What happens when the buoyancy (density) of the two gravity currents is different?
+A sea breeze is another example of a gravity current. As the air over land heats up during the day it becomes less dense than air over cool ocean waters. The relative dense marine air then moves onto land in the form of a sea breeze. Over small land features (e.g. islands or penninsulas) sea breezes can propagate towards the center of the land mass from multiple sides and collide in the middle. This can generate vigorous updrafts and rain. [van der Wiel et al.](./papers/vanderWielEtAl.pdf) used laboratory experiments to study this pheonomenon. Try reproducing this phenomena in Oceananigans. Can you predict the maximum height that the gravity currents can reach after they collide using an energy argument? What happens when the buoyancy (density) of the two gravity currents is different?
 
 ## Gravity currents in stable stratification
 
