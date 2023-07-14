@@ -1,7 +1,7 @@
 
 # This script reads in output from gravitycurrent.jl, makes a plot, and saves an animation
 
-using JLD2, Plots, Printf
+using Oceananigans, JLD2, Plots, Printf
 
 # Set the filename (without the extension)
 filename="gravitycurrent"
@@ -53,11 +53,11 @@ anim = @animate for (i, iter) in enumerate(iterations)
     b_bottom[:,i]=b_xz[:,1,1]; # This is the buouyancy along the bottom wall
     t_save[i]=t # save the time
 
-        u_xz_plot = Plots.heatmap(xu, zu, u_xz'; color=:balance, xlabel="x", ylabel="z");  
-        v_xz_plot = Plots.heatmap(xv, zv, v_xz'; color=:balance, xlabel="x", ylabel="z"); 
-        w_xz_plot = Plots.heatmap(xw, zw, w_xz'; color=:balance, xlabel="x", ylabel="z"); 
-        b_xz_plot = Plots.heatmap(xb, zb, b_xz'; color=:thermal, xlabel="x", ylabel="z"); 
-        c_xz_plot = Plots.heatmap(xb, zb, c_xz'; color=:thermal, xlabel="x", ylabel="z"); 
+        u_xz_plot = heatmap(xu, zu, u_xz'; color = :balance, xlabel = "x", ylabel = "z", aspect_ratio = :equal);  
+        v_xz_plot = heatmap(xv, zv, v_xz'; color = :balance, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
+        w_xz_plot = heatmap(xw, zw, w_xz'; color = :balance, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
+        b_xz_plot = heatmap(xb, zb, b_xz'; color = :thermal, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
+        c_xz_plot = heatmap(xb, zb, c_xz'; color = :thermal, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
 
     u_title = @sprintf("u (m s⁻¹), t = %s", prettytime(t));
     v_title = @sprintf("v (m s⁻¹), t = %s", prettytime(t));
@@ -66,8 +66,8 @@ anim = @animate for (i, iter) in enumerate(iterations)
     c_title = @sprintf("c (dye), t = %s", prettytime(t));
 
 # Combine the sub-plots into a single figure
-    Plots.plot(u_xz_plot, b_xz_plot, c_xz_plot, layout=(3, 1), size=(1600, 400),
-    title=[u_title b_title c_title])
+    plot(b_xz_plot, c_xz_plot, layout=(2, 1), size=(1600, 400),
+    title=[b_title c_title])
 
     iter == iterations[end] && close(file_xz)
 end
@@ -78,4 +78,4 @@ mp4(anim, "gravitycurrent.mp4", fps = 20) # hide
 # Now, make a plot of our saved variables
 # In this case, plot the buoyancy at the bottom of the domain as a function of x and t
 # You can (and should) change this to interrogate other quantities
-Plots.heatmap(xb, t_save, b_bottom', xlabel="x", ylabel="t", title="buoyancy at z=0")
+heatmap(xb, t_save, b_bottom', xlabel="x", ylabel="t", title="buoyancy at z=0")
