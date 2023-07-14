@@ -53,7 +53,7 @@ Now, let's do some science and explore the dynamics of gravity currents using Oc
 
 Gravity currents develop when dense fluid flows beneath light fluid under the effect of gravity.
 The image below shows a dramatic example of a gravity current known as a `haboob' where sand and dust is picked up by strong winds associated with a weather front.
-![Haboob](./haboob-arizona-august-2020.png)
+![Haboob](./images/haboob-arizona-august-2020.png)
 
 A simple way to model gravity currents is using a `lock-exchange' flow. In the laboratory, dense fluid would be separated from light fluid by a vertical barrier. After the barrier is removed, the dense fluid will flow along the bottom of the tank with a height $H$. 
 
@@ -67,9 +67,11 @@ $\Delta b$ is the buoyancy difference between the gravity current and the ambien
 
 # Suggested further investigations
 
-Each project will have some suggestions for further investigations at the end. Don't worry if you don't have time to do these. In the last computing session, your group will have time to do some of these futher investigations (or think of your own!) and make a presentation to show to the group on the final day of the summer school.
+Each project will have some suggestions for further investigations at the end. Don't worry if you don't have time to do these. In the last computing session, your group will have time to do some of these futher investigations (or think of your own!) and make a presentation to show to the group on the final day of the summer school. These extensions will require some modification to gravitycurrent.jl, and you might want to copy and rename that script before you start editing.
 
 ## Colliding gravity currents
+
+A sea breeze is another example of a gravity current. As the air over land heats up during the day it becomes less dense than air over cool ocean waters. The relative dense marine air then moves onto land in the form of a sea breeze. Over small land features (e.g. islands or penninsulas) sea breezes can propagate towards the center of the land mass from multiple sides and collide in the middle. This can generate vigorous updrafts and rain. [Shin et al.](./papers/ShinDalzielLinden.pdf) used laboratory experiments to study this pheonomenon. Try reproducing this phenomena in Oceananigans. Can you predict the maximum height that the gravity currents can reach after they collide using an energy argument? What happens when the buoyancy (density) of the two gravity currents is different?
 
 ## Gravity currents in stable stratification
 
