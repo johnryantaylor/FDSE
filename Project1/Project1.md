@@ -1,4 +1,4 @@
-#Getting started
+# Getting started
 This project will introduce you to Oceananigans and explore the dynamics of gravity currents
 
 To start, we need to install Oceananigans. To do this, open VS Code (if you don't already have it open).
@@ -20,18 +20,61 @@ The model will run for 20 time units and print messages so that you can keep tra
 
 Now that the code is running, we're ready to do some science! 🧪
 
-#Introduction to Oceananigans
+# Introduction to Oceananigans 🌊
 Although it was designed to simulate ocean physics, Oceananigans is a powerful general purpose computational fluid dyanmics (CFD) code. Here, we will use Oceananigans to explore the dynamics of gravity currents in the lock-release problem.
 
 Oceananigans can solve equations in dimensional or non-dimensional form. In this project we will use it to solve the non-dimensional incompressible, Boussinesq equations, which can be written:
-$$\frac{\partial \mathbf{u}^*}{\partial t^*}+\mathbf{u}^*\cdot \nabla_* \mathbf{u}^*=-\nabla_* p^*+\frac{1}{Re} \nabla_*^2\mathbf{u}^*+Ri \hspace{2pt} b^* \hat{g},$$
-$$\frac{\partial b^*}{\partial t^*}+\mathbf{u}^*\cdot \nabla_* b^* = \frac{1}{Re Pr} \nabla_*^2 b^*,$$
-$$\nabla_*\cdot \mathbf{u}^* = 0,$$
-where $\mathbf{u}^*=(u^*,v^*)$ is the 2D velocity vector, $\nabla^*=(\partial/\partial x^*,\partial/\partial y^*)$, and $\hat{g}$ is a unit vector pointing in the direction of gravity. Here $*$ indicates non-dimensional quantities, which have been normalized using a length scale, $L$, velocity, $U_0$, and buoyancy, $B_0$. Note that the constant density, $\rho_0$, has been absorbed into the definition of the non-dimensional pressure, $p^*$. In this case, the non dimensional Reynolds, Richardson, and Prandtl numbers are:
-\begin{equation}
-Re\equiv \frac{U_0 L}{\nu}, \quad Ri\equiv \frac{B_0 L}{U_0^2}, \quad Pr\equiv \frac{\nu}{\kappa},
-\end{equation}
+$$\frac{\partial \mathbf{u}}{\partial t}+\mathbf{u}\cdot \nabla \mathbf{u}=-\nabla p+\frac{1}{Re} \nabla^2\mathbf{u}+ b \hat{\mathbf{z}},$$
+$$\frac{\partial b}{\partial t}+\mathbf{u}\cdot \nabla b = \frac{1}{Re Pr} \nabla^2 b,$$
+$$\nabla\cdot \mathbf{u} = 0,$$
+where $\mathbf{u}=(u,v,w)$ is the velocity vector and $\nabla=(\partial/\partial x,\partial/\partial y,\partial/\partial z)$. The variables have made non-dimensional using a length scale, $L$, velocity, $U_0$, and buoyancy, $B_0$. Note that the constant density, $\rho_0$, has been absorbed into the definition of the non-dimensional pressure, $p$. In this case, the non dimensional Reynolds, Richardson, and Prandtl numbers are
+$$Re\equiv \frac{U_0 L}{\nu} \quad \mbox{and} \quad Pr\equiv \frac{\nu}{\kappa},$$
 and $\nu$ and $\kappa$ are the kinematic viscosity and molecular diffusivity, respectively. 
+
+Have a look at gravitycurrent.jl.  It is extensively commented which should help you understand what is happening
+
+Oceananigans scripts have several standard components:
+1. Load any packages that will be needed in the script
+2. Set the parameters that will be used for the model run
+3. Build a model grid
+4. Set the boundary and initial conditions
+5. Create 'model' and 'simulation' objects
+6. Define callbacks to call functions periodically durind the simulation
+7. Run the model
+8. Process and plot the output
+
+This structure will help get you started, but Oceanigans is very flexible in how you use it.
+
+You can stop a simulation at any time by pressing CONTROL-C.  If you do this, the plotting script won't be called at the end, but you can run it yourself after you cancel the job.
+
+# Gravity currents
+
+Now, let's do some science and explore the dynamics of gravity currents using Oceananigans
+
+Gravity currents develop when dense fluid flows beneath light fluid under the effect of gravity.
+The image below shows a dramatic example of a gravity current known as a `haboob' where sand and dust is picked up by strong winds associated with a weather front.
+![Haboob](./haboob-arizona-august-2020.png)
+
+A simple way to model gravity currents is using a `lock-exchange' flow. In the laboratory, dense fluid would be separated from light fluid by a vertical barrier. After the barrier is removed, the dense fluid will flow along the bottom of the tank with a height $H$. 
+
+We can simulate the lock-exchange problem by initializing the buoyancy using the step-like $tanh$ function. The initial velocity is typically zero, but we might want to add some small random noise to the velocity field to helpk trigger turbuelence.
+
+In gravitycurrent.jl, the equations are non-dimensionalized using the vertical domain height and the change in buoyancy, $\Delta b=-g \Delta \rho / \rho_0$, where $\Delta \rho$ characterizes the initial density jump. The domain size is 10 non-dimensional units in the $x$-direction and 1 unit (by definition) in the $z$-direction. The Reynolds and Prandtl numbers are set to 5000 and 1, respectively, and we use $Nx=256$ and $Nz=32$ gridpoints in the x and z directions, respectively. You might want to take some time to change these parameters to get a feel for the flow and for how the model performs. 
+
+Based on scaling arguments, a semi-infinite gravity current should propagate at a speed U, where
+$$U \sim \sqrt{\Delta b H}$$,
+$\Delta b$ is the buoyancy difference between the gravity current and the ambient fluid, and $H$ is the gravity current height. Try running gravitycurrent.jl for several different values of $\Delta b$, and calculate the propagation speed in each case. Does the scaling law hold? Can you think of ways to test this relation quantitatively?
+
+# Suggested further investigations
+
+Each project will have some suggestions for further investigations at the end. Don't worry if you don't have time to do these. In the last computing session, your group will have time to do some of these futher investigations (or think of your own!) and make a presentation to show to the group on the final day of the summer school.
+
+## Gravity currents in stable stratification
+
+Try repeating the gravity current experiments, but start with a stable buoyancy profile in the ambient fluid. Start out with a case where the density of the fluid to the left of the `lock' is equal to the densest fluid in the ambient. Can you detect internal waves propagating in the ambient fluid ahead of the gravity current? To do this, you may need to reduce the width of the lock or make the domain larger in $x$. It also might be helpful to create a second, passive tracer and use it to `dye' the fluid in the lock to track the gravity current. Try varying the density in the fluid in the lock in relation to the minimum and maximum buoyancy in the stratified ambient. For example, what happens when the lock fluid has the same density as the average of the ambient fluid?
+
+## Gravity currents on a slope
+
 
 
 
