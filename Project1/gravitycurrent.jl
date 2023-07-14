@@ -51,26 +51,27 @@ b_bcs = FieldBoundaryConditions(top = FluxBoundaryCondition(0),
                                 bottom = FluxBoundaryCondition(0),
                                 east = FluxBoundaryCondition(0),
                                 west = FluxBoundaryCondition(0))
-                                         
+
 # Now, define a 'model' where we specify the grid, advection scheme, bcs, and other settings
 model = NonhydrostaticModel(; grid,
               advection = UpwindBiasedFifthOrder(),  # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
             timestepper = :RungeKutta3, # Set the timestepping scheme, here 3rd order Runge-Kutta
-                tracers = :b,  # Set the name(s) of any tracers, here b is buoyancy
-               buoyancy = BuoyancyTracer(), # this tells the model that b will act as the buoyancy (and influence momentum)
+                tracers = (:b, :c),  # Set the name(s) of any tracers, here b is buoyancy and c is a passive tracer (e.g. dye)
+               buoyancy = Buoyancy(model=BuoyancyTracer()), # this tells the model that b will act as the buoyancy (and influence momentum) 
                 closure = (ScalarDiffusivity(ν=1/Re, κ=1/Re)),  # set a constant kinematic viscosity and diffusivty, here just 1/Re since we are solving the non-dimensional equations 
     boundary_conditions = (u=u_bcs, w=w_bcs, b=b_bcs) # specify the boundary conditions that we defiend above
 )
 
 # Set initial conditions
-# Here, we start with a tanh function for buoyancy, plus a random perturbation
+# Here, we start with a tanh function for buoyancy and add a random perturbation to the velocity. 
 uᵢ(x, y, z) = kick*randn()
 vᵢ(x, y, z) = 0
 wᵢ(x, y, z) = kick*randn()
 bᵢ(x, y, z) = (Δb/2)*(1+tanh((x-xc)/Lf))
+cᵢ(x, y, z) = exp(-((x-Lx/2)/(Lx/50))^2) # Initialize with a thin tracer (dye) streak in the center of the domain
 
 # Send the initial conditions to the model to initialize the variables
-set!(model, u=uᵢ, v=vᵢ, w=wᵢ, b=bᵢ)
+set!(model, u=uᵢ, v=vᵢ, w=wᵢ, b=bᵢ, c=cᵢ)
 
 # Now, we create a 'simulation' to run the model for a specified length of time
 simulation = Simulation(model, Δt = max_Δt, stop_time = duration)
@@ -102,16 +103,17 @@ simulation.callbacks[:progress] = Callback(progress, IterationInterval(10))
 # ### Output
 
 u, v, w = model.velocities # unpack velocity `Field`s
-b = model.tracers.b
+b = model.tracers.b # extract the buoyancy
+c = model.tracers.c # extract the tracer
 
 # Set the name of the output file
 filename = "gravitycurrent"
 
 simulation.output_writers[:xz_slices] =
-    JLD2OutputWriter(model, (; u, v, w, b),
+    JLD2OutputWriter(model, (; u, v, w, b, c),
                           filename = filename * ".jld2",
                           indices = (:,1,:),
-                         schedule = TimeInterval(0.1),
+                         schedule = TimeInterval(0.2),
                             overwrite_existing = true)
 
 # If you are running in 3D, you could save an xy slice like this:                             
