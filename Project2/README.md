@@ -42,8 +42,8 @@ Once you are happy that `KH.jl` is capturing the most unstable mode, you can ver
 
 Finally, try making a plot of the gradient Richardson number as a function of depth and time where the shear and buoyancy frequency are calculated from x-averages of the `u` and `b` fields. Note that Oceananigans includes gradient operators, e.g. $\partial z (u)$ returns the derivative of `u` in the vertical direction. How does the value of the gradient Richardson number compare with what you might have expected based on the Miles-Howard theorem.
 
-## Suggested further investigations
-# Mixing efficiency
+# Suggested further investigations
+## Mixing efficiency
 In a stratified flows, kinetic energy can be converted to potential energy by mixing the stable density profile, raising the center of mass of the fluid. Some kinetic energy is also lost to viscous dissipation. The mixing efficiency, $\Lambda$,of great interest in the stratified turbulence literature, is the ratio of the kinetic energy used to mix the density profile to the loss to viscous dissipation. Set up and run a simulation of K-H instability using Oceananigans, and let the flow evolve long enough so that it settles back into a non-turbulent state (you may need to decrease the resolution for this, and you might also want to increase the size of the domain in $z$ to minimise boundary effects). Calculate the kinetic and potential energy at the start and end of the simulation, and the change over the simulation, $\Delta KE$ and $\Delta PE$. Calculate the flux coefficient $\Gamma \equiv B/\epsilon \simeq \Delta PE/(-\Delta KE-\Delta PE)$, where $B$ is the buoyancy flux, and $\epsilon$ is the kinetic energy dissipation. Then, use the flux coefficient to estimate the mixing efficiency, $\eta$, using the relation $\Gamma=\eta/(1-\eta)$. Many parameterizations for mixing in the ocean and atmosphere use a constant mixing efficiency with a value close to $\eta \simeq 0.2$. How does your result compare?  Using time series of the kinetic and potential energy, can you estimate the instantaneous mixing efficiency as a function of time?
 
 ## Holmboe instability
