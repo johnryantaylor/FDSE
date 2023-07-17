@@ -3,7 +3,7 @@
 # Background
 Although most natural flows are time-varying, and have complicated spatial structure, important insights can be gained by examining the stability of simple flows. For example, many identifiable features in the atmosphere and ocean, such as eddies and billow clouds (shown), are generated and derive their properties from fluid instabilities.
 
-[KH-billows over Mt. Shasta]{"./images/kh-billows.jpg"}
+![KH-billows over Mt. Shasta]{"./images/kh-billows.jpg"}
 Kelvin-Helmholtz billows developing in a cloud layer over Mount Shasta, California. Photo copyright 1999, Beverly Shannon.
 
 # Introduction
@@ -11,7 +11,7 @@ Here, we will examine the basic stability properties of a stratified shear flow,
 
 Start by considering a stratified shear flow of the form:
 $$
-\mathbf{U}=S_0h \mbox{tanh}\left(\frac{y-LY/2}{h}\right)\hat{\imath},
+\mathbf{U}=S_0h \mbox{tanh}\left(\frac{y-LY/2}{h}\right)\hat{i},
 $$
 and
 $$
