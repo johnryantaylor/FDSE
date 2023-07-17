@@ -1,7 +1,7 @@
 # Project 2: Kelvin-Helmholtz instability
 
 ## Background
-Although most natural flows are time-varying, and have complicated spatial structure, important insights can be gained by examining the stability of simple flows. For example, many identifiable features in the atmosphere and ocean, such as eddies and billow clouds (shown), are generated and derive their properties from fluid instabilities.
+Although most natural flows are time-varying, and have complicated spatial structure, important insights can be gained by examining the stability of small amplitude perturbations to simple flows. For example, many identifiable features in the atmosphere and ocean, such as eddies and billow clouds, are generated and derive their properties from fluid instabilities.
 
 ![KH-billows over Mt. Shasta](./images/kh-billows.jpg)
 
