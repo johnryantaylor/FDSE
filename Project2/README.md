@@ -11,7 +11,7 @@ Here, we will examine the basic stability properties of a stratified shear flow,
 
 Start by considering a stratified shear flow of the form:
 $$
-\mathbf{U}=S_0h \mbox{tanh}\left(\frac{y-LY/2}{h}\right)\hat{i},
+\mathbf{U}=S_0h \mbox{tanh}(\frac{y-LY/2}{h})\hat{i},
 $$
 and
 $$
