@@ -44,7 +44,7 @@ anim = @animate for (i, iter) in enumerate(iterations)
     b_xz = file_xz["timeseries/b/$iter"][:, 1, :];
     c_xz = file_xz["timeseries/c/$iter"][:, 1, :];
 
-# If you want an x-y slice, you get get it this way:
+# If you want an x-y slice, you can get it this way:
     # b_xy = file_xy["timeseries/b/$iter"][:, :, 1];
 
     t = file_xz["timeseries/t/$iter"];
@@ -59,11 +59,11 @@ anim = @animate for (i, iter) in enumerate(iterations)
         b_xz_plot = heatmap(xb, zb, b_xz'; color = :thermal, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
         c_xz_plot = heatmap(xb, zb, c_xz'; color = :thermal, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
 
-    u_title = @sprintf("u (m s⁻¹), t = %s", prettytime(t));
-    v_title = @sprintf("v (m s⁻¹), t = %s", prettytime(t));
-    w_title = @sprintf("w (m s⁻¹), t = %s", prettytime(t));
-    b_title = @sprintf("b (m s⁻²), t = %s", prettytime(t));
-    c_title = @sprintf("c (dye), t = %s", prettytime(t));
+    u_title = @sprintf("u, t = %s", round(t));
+    v_title = @sprintf("v, t = %s", round(t));
+    w_title = @sprintf("w, t = %s", round(t));
+    b_title = @sprintf("b, t = %s", round(t));
+    c_title = @sprintf("c (dye), t = %s", round(t));
 
 # Combine the sub-plots into a single figure
     plot(b_xz_plot, c_xz_plot, layout = (2, 1), size = (1600, 400),
