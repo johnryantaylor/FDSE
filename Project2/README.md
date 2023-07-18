@@ -30,7 +30,9 @@ At the start of `linstab.jl`, you can specify several parameters associated with
 
 Optionally, edit these parameters to match your choice of parameters (the suggested ones listed above are in place now.)\\
 
-Run the script `linstab.jl` in Julia, which will then plot the growth rate of the most unstable mode as a function of the horizontal wavenumber. How does the most unstable mode vary with the shear layer width, and the viscosity?
+Note that `linstab.jl` uses a plotting package called `Plotly` which allows interaction with the plot which is useful for this part. Before you run `linstab.jl`, install `Plotly` by typing `]` followed by `add Plotly` in the Julia REPL (the command line interace). 
+
+Now, run the script `linstab.jl` in Julia, which will plot the growth rate of the most unstable mode as a function of the horizontal wavenumber. How does the most unstable mode vary with the shear layer width, and the viscosity?
 
 ## Nonlinear simulations
 
