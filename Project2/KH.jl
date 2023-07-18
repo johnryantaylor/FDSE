@@ -42,7 +42,8 @@ model = NonhydrostaticModel(; grid,
             timestepper = :RungeKutta3, # Set the timestepping scheme, here 3rd order Runge-Kutta
                 tracers = (:b),  # Set the name(s) of any tracers, here b is buoyancy
                buoyancy = Buoyancy(model=BuoyancyTracer()), # this tells the model that b will act as the buoyancy (and influence momentum) 
-                closure = (ScalarDiffusivity(ν = 1 / Re, κ = 1 / Re))  # set a constant kinematic viscosity and diffusivty, here just 1/Re since we are solving the non-dimensional equations 
+                closure = (ScalarDiffusivity(ν = 1 / Re, κ = 1 / Re)),  # set a constant kinematic viscosity and diffusivty, here just 1/Re since we are solving the non-dimensional equations 
+                coriolis = nothing # this line tells the mdoel not to include system rotation (no Coriolis acceleration)
 )
 
 # Set initial conditions
