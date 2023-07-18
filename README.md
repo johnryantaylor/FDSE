@@ -24,7 +24,7 @@ To get started, follow these steps:
 14. Find and install the Julia Language Support extension in VS code
 15. Find and install the GitHub Pull Requests and Issues extension in VS code
 
-For the next steps, see the project description files inside each project folder.
+For the next steps, see the README file inside the Project 1 folder.
 
 I hope you enjoy the projects!
 
