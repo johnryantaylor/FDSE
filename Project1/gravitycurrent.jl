@@ -21,7 +21,7 @@ duration = 20 # The non-dimensional duration of the simulation
 Re = 5000
 
 # Set the change in the non-dimensional buouancy 
-Δb = 1
+Δb = 1 
 
 # Set the amplitude of the random perturbation (kick)
 kick = 0.05
