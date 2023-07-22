@@ -5,11 +5,11 @@ using Statistics # used in SSF.jl
 using LinearAlgebra  # used in SSF.jl
 
 
-include("SSF.jl")  # We include SSF.jl which contains the function to do the calculation
+include("./code/SSF.jl")  # We include SSF.jl which contains the function to do the calculation
 # The following functions calculate discrete derivatives
-include("ddz.jl")
-include("ddz2.jl")
-include("ddz4.jl")
+include("./code/ddz.jl")
+include("./code/ddz2.jl")
+include("./code/ddz4.jl")
 
 # ********** User input parameters **********
 LZ = 1    # The z-domain size
