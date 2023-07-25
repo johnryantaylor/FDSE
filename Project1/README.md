@@ -27,7 +27,7 @@ Oceananigans can solve equations in dimensional or non-dimensional form. In this
 $$\frac{\partial \mathbf{u}}{\partial t}+\mathbf{u}\cdot \nabla \mathbf{u}=-\nabla p+\frac{1}{Re} \nabla^2\mathbf{u}+ b \hat{\mathbf{z}},$$
 $$\frac{\partial b}{\partial t}+\mathbf{u}\cdot \nabla b = \frac{1}{Re Pr} \nabla^2 b,$$
 $$\nabla\cdot \mathbf{u} = 0,$$
-where $\mathbf{u}=(u,v,w)$ is the velocity vector and $\nabla=(\partial/\partial x,\partial/\partial y,\partial/\partial z)$. The variables have made non-dimensional using a length scale, $L$, velocity, $U_0$, and buoyancy, $B_0$. Note that the constant density, $\rho_0$, has been absorbed into the definition of the non-dimensional pressure, $p$. In this case, the non dimensional Reynolds, Richardson, and Prandtl numbers are
+where $\mathbf{u}=(u,v,w)$ is the velocity vector and $\nabla=(\partial/\partial x,\partial/\partial y,\partial/\partial z)$. The variables have made non-dimensional using a length scale, $L$, velocity, $U_0$, and buoyancy, $B_0$. Note that the constant density, $\rho_0$, has been absorbed into the definition of the non-dimensional pressure, $p$. In this case, the non dimensional Reynolds and Prandtl numbers are
 $$Re\equiv \frac{U_0 L}{\nu} \quad \mbox{and} \quad Pr\equiv \frac{\nu}{\kappa},$$
 and $\nu$ and $\kappa$ are the kinematic viscosity and molecular diffusivity, respectively. 
 
