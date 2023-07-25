@@ -57,7 +57,7 @@ The image below shows a dramatic example of a gravity current known as a 'haboob
 
 A simple way to model gravity currents is using a 'lock-exchange' flow. In the laboratory, dense fluid would be separated from light fluid by a vertical barrier. After the barrier is removed, the dense fluid will flow along the bottom of the tank with a height $H$. [Shin et al.](./papers/ShinDalzielLinden.pdf) discuss laboratory experiments of gravity currents arising from the 'lock-exchange' problem.
 
-We can simulate the lock-exchange problem by initializing the buoyancy using the step-like $tanh$ function. The initial velocity is typically zero, but we might want to add some small random noise to the velocity field to helpk trigger turbuelence.
+We can simulate the lock-exchange problem by initializing the buoyancy using the step-like $tanh$ function. The initial velocity is typically zero, but we might want to add some small random noise to the velocity field to help trigger turbuelence.
 
 In `gravitycurrent.jl`, the equations are non-dimensionalized using the vertical domain height and the change in buoyancy, $\Delta b=-g \Delta \rho / \rho_0$, where $\Delta \rho$ characterizes the initial density jump. The domain size is 10 non-dimensional units in the $x$-direction and 1 unit (by definition) in the $z$-direction. The Reynolds and Prandtl numbers are set to 5000 and 1, respectively, and we use $Nx=256$ and $Nz=32$ gridpoints in the x and z directions, respectively. You might want to take some time to change these parameters to get a feel for the flow and for how the model performs. 
 
