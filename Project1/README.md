@@ -39,7 +39,7 @@ Oceananigans scripts have several standard components:
 3. Build a model grid
 4. Set the boundary and initial conditions
 5. Create `model` and `simulation` objects
-6. Define callbacks to call functions periodically durind the simulation
+6. Define callbacks to call functions periodically during the simulation
 7. Run the model
 8. Process and plot the output
 
