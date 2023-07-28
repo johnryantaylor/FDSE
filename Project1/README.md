@@ -27,7 +27,7 @@ Oceananigans can solve equations in dimensional or non-dimensional form. In this
 $$\frac{\partial \mathbf{u}}{\partial t}+\mathbf{u}\cdot \nabla \mathbf{u}=-\nabla p+\frac{1}{Re} \nabla^2\mathbf{u}+ b \hat{\mathbf{z}},$$
 $$\frac{\partial b}{\partial t}+\mathbf{u}\cdot \nabla b = \frac{1}{Re Pr} \nabla^2 b,$$
 $$\nabla\cdot \mathbf{u} = 0,$$
-where $\mathbf{u}=(u,v,w)$ is the velocity vector and $\nabla=(\partial/\partial x,\partial/\partial y,\partial/\partial z)$. The variables have made non-dimensional using a length scale, $L$, velocity, $U_0$, and buoyancy, $B_0$. Note that the constant density, $\rho_0$, has been absorbed into the definition of the non-dimensional pressure, $p$. In this case, the non dimensional Reynolds, Richardson, and Prandtl numbers are
+where $\mathbf{u}=(u,v,w)$ is the velocity vector and $\nabla=(\partial/\partial x,\partial/\partial y,\partial/\partial z)$. The variables have made non-dimensional using a length scale, $L$, velocity, $U_0$, and buoyancy, $B_0$. Note that the constant density, $\rho_0$, has been absorbed into the definition of the non-dimensional pressure, $p$. In this case, the non dimensional Reynolds and Prandtl numbers are
 $$Re\equiv \frac{U_0 L}{\nu} \quad \mbox{and} \quad Pr\equiv \frac{\nu}{\kappa},$$
 and $\nu$ and $\kappa$ are the kinematic viscosity and molecular diffusivity, respectively. 
 
@@ -39,7 +39,7 @@ Oceananigans scripts have several standard components:
 3. Build a model grid
 4. Set the boundary and initial conditions
 5. Create `model` and `simulation` objects
-6. Define callbacks to call functions periodically durind the simulation
+6. Define callbacks to call functions periodically during the simulation
 7. Run the model
 8. Process and plot the output
 
@@ -57,7 +57,7 @@ The image below shows a dramatic example of a gravity current known as a 'haboob
 
 A simple way to model gravity currents is using a 'lock-exchange' flow. In the laboratory, dense fluid would be separated from light fluid by a vertical barrier. After the barrier is removed, the dense fluid will flow along the bottom of the tank with a height $H$. [Shin et al.](./papers/ShinDalzielLinden.pdf) discuss laboratory experiments of gravity currents arising from the 'lock-exchange' problem.
 
-We can simulate the lock-exchange problem by initializing the buoyancy using the step-like $tanh$ function. The initial velocity is typically zero, but we might want to add some small random noise to the velocity field to helpk trigger turbuelence.
+We can simulate the lock-exchange problem by initializing the buoyancy using the step-like $tanh$ function. The initial velocity is typically zero, but we might want to add some small random noise to the velocity field to help trigger turbuelence.
 
 In `gravitycurrent.jl`, the equations are non-dimensionalized using the vertical domain height and the change in buoyancy, $\Delta b=-g \Delta \rho / \rho_0$, where $\Delta \rho$ characterizes the initial density jump. The domain size is 10 non-dimensional units in the $x$-direction and 1 unit (by definition) in the $z$-direction. The Reynolds and Prandtl numbers are set to 5000 and 1, respectively, and we use $Nx=256$ and $Nz=32$ gridpoints in the x and z directions, respectively. You might want to take some time to change these parameters to get a feel for the flow and for how the model performs. 
 
