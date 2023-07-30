@@ -79,7 +79,7 @@ Try repeating the gravity current experiments, but start with a stable buoyancy 
 
 ## Gravity currents on a slope
 
-Oceananigans gives us control of the direction in which gravity points. By changing the angle of gravity in the (x,z) plane, we can use this to simulate a gravity current on a prograde or retrograde slope. To do this, add a definition of the variable `gravity_unit_vector` in the call to Buoyancy when `model` is defined. Note that the plots that are made in `plot_gravitycurrent.jl` will be in a tilted reference frame aligned with the computational domain. You might want to try to rotate these plots to have gravity point down. How does the tile angle influence the speed of the gravity current? 
+Oceananigans gives us control of the direction in which gravity points. By changing the angle of gravity in the (x,z) plane, we can use this to simulate a gravity current on a prograde or retrograde slope. To do this, add a definition of the variable `gravity_unit_vector` in the call to Buoyancy when `model` is defined. Note that the plots that are made in `plot_gravitycurrent.jl` will be in a tilted reference frame aligned with the computational domain. How does the tile angle influence the speed of the gravity current? 
 
 
 
