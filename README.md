@@ -9,7 +9,7 @@ Julia is a modern programming language which is as easy to use as python or Matl
 
 Julia comes with a REPL (which stands for read-evaluate-print-loop) which provides a command-line interface much like python or Matlab. While it is possible to use this on its own, we suggest using a code development platform which provides a single tool to edit and run the scripts and display plots. In particular, we recommend Visual Studio Code which is an excellent tool and free to use.
 
-To get started, follow these steps:
+For the recommended installation, follow these steps:
 1. If you don't already have one, create a free account on http://github.com (click the sign-up button in the top right corner).
 2. Log in to http://github.com, then re-open this page and fork this repository (click the "Fork" button in the upper right).
 4. Download and install the latest stable version of Julia for your platform (linux, windows, mac) here: https://julialang.org/downloads
