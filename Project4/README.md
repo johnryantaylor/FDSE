@@ -10,16 +10,32 @@ Fluid dynamics has a very strong influence on phytoplankton (and hence the globa
 
 This project will use [OceanBioME.jl](https://github.com/OceanBioME/OceanBioME.jl)) (Ocean Biogeochemical Modelling Environment), a Julia package developed in the DAMTP Ocean Dynamics group at Cambridge to provide biogeochemical models for Oceananigans. OceanBioME has powerful features including state-of-the-art biogeochemical models, models for the air-sea gas exchange, sediment models, and biologically-active particles. Here, we will use OceanBioME to provide a model of the predator-prey dynamics of a population of phytoplankton and zooplankton. We will then use Oceananigans to explore how advection and diffusion modifies the intrinsic ecosystem dynamics.
 
+Before you can use the code for this project, you will need to install OceanBioME. To do this, from the Julia REPL (command prompt), type `]`, followed by `add OceanBiome`. Once the package installs, return to the command prompt using the `delete` key.
+
 # 0-dimensional 'box' model
 Although OceanBioME is primarily intended to be coupled with Oceananigans, it can be used on its own to integrate the equations describing the dynamics of the ocean ecosystem. This is useful for developing an understanding of the intrinsic ecosystem dynamics, before adding the complications of fluid dynamics, and for debugging new models. 
 
 The evolving populations of phytoplankton and zooplankton can be modeled as a predator-prey system. A classic formulation of this is known as the Lotka-Volterra equations, which can be written
 
-$$ \frac{dP}{dt} = \alpha P - \beta P Z $$,
+$$\frac{dP}{dt}=\alpha P-\beta P Z $$,
 
-$$ \frac{dZ}{dt} = \delta \beta P Z - \gamma Z$$,
+$$\frac{dZ}{dt} = \delta \beta P Z - \gamma Z$$,
 
 where $P$ and $Z$ are the concentrations of phytoplankton and zooplankton, respectively. The constants in the model are the phytoplankton growth rate, $\alpha$, the grazing rate, $\beta$, the grazing efficiency, $\delta$, and the zooplankton mortality rate, $\gamma$. These equations are implemented in `PZ.jl`. You shouldn't need to edit this file unless you want to change the form of the equations that are being considered. Default values of the parameters are set in this file, but you can also set these parameters when you run the model. Note also that the phytoplankoton growth rate is modified by a depth-dependent function to mimic the level of light exposure. This will be used in the following sections and has no impact on the box model (where the depth is z=0 by default).
+
+The equations above can be solved numerically by running `PZ_box.jl`. Try running this script and watch the movie that it generates. The system has two fixed points (one with P=0, Z=0) and exhibits oscillatory behavior where the population of the predators lags the population of the prey. If you aren't already familiar with the Lotka-Volterra equations, you might find it helpful to gain some insight into the system by varying the model parameters. In particular, try varying the phytoplankoton growth rate, $\alpha$, and pay attention to how this parameter influences the amplitude and frequency of the oscillations. This will help you interpret the results in the next two sections.
+
+# 1-dimensional 'column' model
+
+The growth rate of phytoplankton is set, in part, by the level of available light. As a result, the phytoplankton growth rate is a function of depth. A simple way to model this is by multiplying the growth rate by an exponential function that decays with depth. Based on your insights from the previous section, how do you expect the frequency of oscillations of the system to vary with depth?
+
+The file `PZ_column.jl` uses Oceananigans to integrate a 1-dimensional 'column' model. Here, the velocity is zero, but an optional diffusivity can be added to the equations governing $P$ and $Z$ (but initially the diffusivity is set to zero). The growth rate is also now a function of depth in the system, with the e-folding depth set by the parameter `light_decay_length`. Try running `PZ_column.jl`. Are the results consistent with your expectations?  Are there any features of the solution that you didn't expect?
+
+Based on the space-time diagram that you get from `PZ_column.jl`, what do you expect to happen when diffusion is added to the system?  Try changing the diffusion coefficient set inside `PZ_column.jl` and run the model again (a good value to start with is $\kappa_t$ = 1e-4). What does this do to the oscillations?  Try varying the diffusivity, $\kappa_t$, the `phytoplankton_growth_rate`, and or `light_decay_length`. 
+
+# 2-dimensional model of lid-driven cavity circulation
+
+
 
 
 
