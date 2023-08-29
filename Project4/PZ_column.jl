@@ -12,9 +12,14 @@ include("PZ.jl")
 # define the grid
 grid = RectilinearGrid(topology = (Flat, Flat, Bounded), size = (100, ), extent = (1, ))
 
+# Specify the biogeochemical model
+biogeochemistry = PhytoplanktonZooplankton()
+# To change the e-folding decay length for the light, replace with the following
+#biogeochemistry = PhytoplanktonZooplankton(light_decay_length=0.1)
+
 # Construct the model using Oceananigans with the biogeochemistry handled by OceanBioME
 model = NonhydrostaticModel(; grid,
-                              biogeochemistry = PhytoplanktonZooplankton(),
+                              biogeochemistry,
                               closure = ScalarDiffusivity(ν = κₜ, κ = κₜ))
 
 set!(model, P = 0.1, Z = 0.1)
@@ -52,8 +57,8 @@ xc, yc, zc = nodes(grid, Center(), Center(), Center())
 # Extract an array of times when the data was saved
 times = P.times
 
-hmP = heatmap(times , zc, log10.(P[1, 1, 1:grid.Nz, 1:end]), xlabel = "time", ylabel = "z (m)", title="log10(Phytoplankton)")
+hmP = heatmap(times , zc, log10.(abs.(P[1, 1, 1:grid.Nz, 1:end])), xlabel = "time", ylabel = "z (m)", title="log10(Phytoplankton)")
 
-hmZ = heatmap(times , zc, log10.(Z[1, 1, 1:grid.Nz, 1:end]), xlabel = "time", ylabel = "z (m)", title="log10(Zooplankton)")
+hmZ = heatmap(times , zc, log10.(abs.(Z[1, 1, 1:grid.Nz, 1:end])), xlabel = "time", ylabel = "z (m)", title="log10(Zooplankton)")
 
 plot(hmP, hmZ, layout=(2,1))

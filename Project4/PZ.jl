@@ -59,8 +59,9 @@ end
     return β *δ * P * Z - γ * Z
 end
 
-using OceanBioME: BoxModel
-import OceanBioME.BoxModels: update_boxmodel_state!
+using Oceananigans.Fields: ZeroField, ConstantField
 
+biogeochemical_drift_velocity(bgc::PhytoplanktonZooplankton, ::Val{:P}) =
+    (u = ZeroField(), v = ZeroField(), w = bgc.sinking_velocity)
 
 

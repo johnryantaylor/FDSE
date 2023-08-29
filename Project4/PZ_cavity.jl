@@ -16,13 +16,14 @@ grid = RectilinearGrid(topology = (Bounded, Flat, Bounded), size = (100, 100, ),
 
 # Set the boundary conditions
 u_bcs = FieldBoundaryConditions(top = ValueBoundaryCondition(vel_top), bottom = ValueBoundaryCondition(0.0))
+w_bcs = FieldBoundaryConditions(east = ValueBoundaryCondition(0.0), west = ValueBoundaryCondition(0.0))
 
 # Construct the model using Oceananigans with the biogeochemistry handled by OceanBioME
 model = NonhydrostaticModel(; grid,
                               advection = UpwindBiasedFifthOrder(),
                               biogeochemistry = PhytoplanktonZooplankton(),
                               closure = ScalarDiffusivity(ν = κₜ, κ = κₜ),
-                              boundary_conditions = (u = u_bcs, ))
+                              boundary_conditions = (u = u_bcs, w = w_bcs))
 
 set!(model, P = 0.1, Z = 0.1)
 
