@@ -1,7 +1,7 @@
 
 # This script reads in output from KH.jl, makes a plot, and saves an animation
 
-using Oceananigans, JLD2, Plotly, Printf
+using Oceananigans, JLD2, Plots, Printf
 
 # Set the filename (without the extension)
 filename = "KH"
