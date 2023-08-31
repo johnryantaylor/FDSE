@@ -38,7 +38,7 @@ The script `PZ_cavity.jl` solves the predator-prey system described above for 2D
 
 Try running `PZ_cavity.jl`, which will produce a movie of the evolution of the velocity components and the phytoplankton and zooplankton concentration. Can you see any evidence of the intrinsic ecosystem dynamics in the evolution of P and Z?  
 
-Consider the timescales involved in this system associated with advection, diffusion, and predator-prey oscillations. You might also find it useful to define appropriate non-dimensional numbers. Try varying some parameters in the model to explore other parts of parameter space (i.e. where the non-dimensional numbers are small or large). Note that lid-driven cavity flow is sensitive to the resolution, and you might find that increasing the lid velocity without increasing the grid spacing will result in numerical instabilities (but it should be save to decrease the lid velocity). 
+Consider the timescales involved in this system associated with advection, diffusion, and predator-prey oscillations. You might also find it useful to define appropriate non-dimensional numbers. Try varying some parameters in the model to explore other parts of parameter space (i.e. where the non-dimensional numbers are small or large). Note that lid-driven cavity flow is sensitive to the resolution, and you might find that increasing the lid velocity without increasing the grid spacing will result in numerical instabilities (but it should be safe to decrease the lid velocity). 
 
 # Suggested further investigations
 
