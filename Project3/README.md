@@ -11,7 +11,7 @@ $$u'_t+Uu'_x - f(y) v' = -\frac{1}{\rho_0} p_x,$$
 $$v'_t+Uv'_x + f(y) u' = -\frac{1}{\rho_0} p_y,$$
 $$u'_x+v'_y=0.$$
 
-Here, we will consider flow on the so-called $\beta$-plane, where the Coriolis parameter is approximated as $f\simeq f_0+\beta y$ (retaining the first two terms in a Taylor series expansion of f(y)). Since the flow is two-dimensional, it can be described by a streamfunction, $\psi'$, where $u'=-\psi'_y$, $v'=\psi'_x$. Taking the curl of the momentum equations to eliminate pressure gives
+Here, we will consider flow on the so-called $\beta$-plane, where the Coriolis parameter is approximated as $f\simeq f_0+\beta y$ (retaining the first two terms in a Taylor series expansion of $f(y)$). Since the flow is two-dimensional, it can be described by a streamfunction, $\psi'$, where $u'=-\psi'_y$, $v'=\psi'_x$. Taking the curl of the momentum equations to eliminate pressure gives
 $$\nabla^2 \psi'_t+U\nabla^2 \psi'_x + \beta \psi'_x=0.$$
 
 By looking for plane-wave solutions of the form:
@@ -29,7 +29,7 @@ where we will start with $u_0=0.001$ m/s so that the dynamics are quasi-linear. 
 
 After running `rossbywave.jl`, watch the movie `rossbywave.mp4`. You should see the waves propagate. Does the direction of propagation match your expecations? You will notice some boundary effects at the north/south ends of the domain where the boundary condition of $v=0$ causes waves to reflect from the boundary.
 
-Estimate the phase speed of waves using the Hovmoller diagram. How does the phase speed compare to what you estimate from the dispersion relation, given above? Try varying the latitude parameter in the BetaPlane function in `rossbywave.jl`, and/or $k$ and $l$ and repeat the simulation and analysis. Note that the simulation results are different from the observations in Chelton and Schlax even though we are using the same sizes of the domain and latitude. This is because we are simulating barotropic Rossby waves, while their observations are of baroclinic ones. 
+Estimate the phase speed of waves using the Hovmoller diagram. How does the phase speed compare to what you estimate from the dispersion relation, given above? Try varying the latitude parameter in the BetaPlane function in `rossbywave.jl`, and/or $k$ and $l$ and repeat the simulation and analysis.
 
 ## Tracer transport by linear and nonlinear Rossby waves
 An important difference between linear (small amplitude) Rossby waves and nonlinear eddies in the ocean and atmosphere is their ability to transport tracers (e.g. temperature, salinity, phytoplankoton, pollutants, etc.) `rossbywave.jl` includes a passive scalar which is proportional to the streamfunction associated with the initial velocity field. Try increasing the amplitude of the initial velocity perturbation. Can you idenfity a transition to nonlinear eddy-like behavior where the eddies trap and transport tracer? For intermediate amplitudes do you see any evidence for a combination of wave and eddy-like characteristcs? 
