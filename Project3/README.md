@@ -11,7 +11,7 @@ $$u'_t+Uu'_x - f(y) v' = -\frac{1}{\rho_0} p_x,$$
 $$v'_t+Uv'_x + f(y) u' = -\frac{1}{\rho_0} p_y,$$
 $$u'_x+v'_y=0.$$
 
-Here, we will consider flow on the so-called $\beta$-plane, where the Coriolis parameter is approximated as $f\simeq f_0+\beta y$ (retaining the first two terms in a Taylor series expansion of $f(y)$). Since the flow is two-dimensional, it can be described by a streamfunction, $\psi'$, where $u'=-\psi'_y$, $v'=\psi'_x$. Taking the curl of the momentum equations to eliminate pressure gives
+Here, we will consider flow on the so-called $\beta$-plane, where the Coriolis parameter is approximated as $f\simeq f_0+\beta y$ (retaining the first two terms in a Taylor series expansion of $f(y)$ ). Since the flow is two-dimensional, it can be described by a streamfunction, $\psi'$, where $u'=-\psi'_y$, $v'=\psi'_x$. Taking the curl of the momentum equations to eliminate pressure gives
 $$\nabla^2 \psi'_t+U\nabla^2 \psi'_x + \beta \psi'_x=0.$$
 
 By looking for plane-wave solutions of the form:
@@ -34,12 +34,12 @@ Estimate the phase speed of waves using the Hovmoller diagram. How does the phas
 ## Tracer transport by linear and nonlinear Rossby waves
 An important difference between linear (small amplitude) Rossby waves and nonlinear eddies in the ocean and atmosphere is their ability to transport tracers (e.g. temperature, salinity, phytoplankoton, pollutants, etc.) `rossbywave.jl` includes a passive scalar which is proportional to the streamfunction associated with the initial velocity field. Try increasing the amplitude of the initial velocity perturbation. Can you idenfity a transition to nonlinear eddy-like behavior where the eddies trap and transport tracer? For intermediate amplitudes do you see any evidence for a combination of wave and eddy-like characteristcs? 
 
-To gain further insight, add code to `rossbywave.jl` to calculate and save the absolute vorticity, $\omega + f$, where $\omega$ is the relative vorticity, i.e. the curl of the 2D velocity vector. Plot conntours of the absolute vorticity for the wave and eddy regimes. What can you conclude about the velocity amplitude where the flow transitions from wave-like to eddy-like?
+To gain further insight, add code to `rossbywave.jl` to calculate and save the absolute vorticity, $\omega + f$, where $\omega$ is the relative vorticity, i.e. the curl of the 2D velocity vector. Plot contours of the absolute vorticity for the wave and eddy regimes. What can you conclude about the velocity amplitude where the flow transitions from wave-like to eddy-like?
 
 ## Suggested Further Investigations
 
 ### Rossby waves on a zonal mean flow
-Try adding a non-zero zonal (east/west) mean flow to your initial conditions (in other words add a function g(y) to $u_i$.) How does this modify the phase speed of the waves? Explore various configurations for the mean flow and the wave perturbations. For example, what happens if the wave perturbations are isolated to a region with zero or non-zero mean flow? How to the waves interarct with the mean flow and how does this vary with the amplitude of the waves and the mean flow?
+Try adding a non-zero zonal (east/west) mean flow to your initial conditions (in other words add a function $g(y)$ to $u_i$.) How does this modify the phase speed of the waves? Explore various configurations for the mean flow and the wave perturbations. For example, what happens if the wave perturbations are isolated to a region with zero or non-zero mean flow? How do the waves interact with the mean flow and how does this vary with the amplitude of the waves and the mean flow?
 
 ### Rossby graveyard
 [Zhai et al.](papers/Zhai.pdf) proposed that a significant amount of energy is dissipated when nonlinear Rossby waves and westward propagating eddies 'break' at western boundaries. Change the topology of the grid to `bounded` in the x-direction, and apply either free-slip (the default) or no-slip boundary conditions (perhaps try both). Examine what happens when the Rossby waves encounter the boundary on the western side of the domain. How do the results change when you vary the amplitude of the initial velocity perturbation?
