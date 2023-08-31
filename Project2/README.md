@@ -16,6 +16,8 @@ and
 $$B=N_0^2h \mbox{tanh}\left(\frac{z-LZ/2}{h}\right),$$
 where $B=-g\rho/\rho_0$ is the buoyancy, $h$ is the height of the shear layer, and $S_0$ and $N_0$ are the shear and buoyancy frequency at the center of the shear layer. The Miles-Howard theorem states that a necessary but not sufficient condition for instability of a stratified, unidirectional, shear flow is that $Ri_g<1/4$ somewhere in the flow, where $Ri_g=N^2/S^2$ is the gradient Richardson number. For the basic state above, the minimum gradient Richardson number is $\mbox{min}(Ri_g)=N_0^2/S_0^2$.  
 
+Note: Before you run any scripts, activate the `environment` for this project by following the same steps as in the Getting Started section from Project 1 (navigate to the `Project2` folder in the Julia REPL and then activate the environment using the package manager). You should repeat this process for the other projects.
+
 ## Linear stability analysis
 Consider the stability of small perturbations the base state defined above: $\mathbf{u}=\mathbf{U}+\epsilon\mathbf{u}'$, $b=B+\epsilon b'$. We can then look for normal mode solutions to the linearised equations of the form
 $$v'=\mbox{Re}\left[\hat{v}(z)\mbox{exp}(\sigma t+\imath (kx+lz))\right].$$
