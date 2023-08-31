@@ -1,0 +1,11 @@
+name = "environment"
+uuid = "ddb35b05-fc0e-451d-8392-5a819b2b7dc8"
+authors = ["johnryantaylor <johnryantaylor@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+JLD2 = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
+OceanBioME = "a49af516-9db8-4be4-be45-1dad61c5a376"
+Oceananigans = "9e8cae18-63c1-5223-a75c-80ca9d6e9a09"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
