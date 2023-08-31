@@ -4,11 +4,11 @@ This project will introduce you to Oceananigans and explore the dynamics of grav
 To start, we need to install Oceananigans. To do this, open VS Code (if you don't already have it open). From the `File` menu, select `Open Folder...` and select the `FDSE` folder. To run the Julia REPL, select `View` and then `Command Palette` from the menu bar. Enter `Julia: Start REPL` and press enter. This should bring up a window in VS Code with a Julia prompt.
 
 Julia has a fantastic built-in package manager for installing and updating add-on packages. Each of the projects has an environment which contains a list of the packages that will be needed for that project. To activate the required packages, follow these steps: 
-1. Navigate to the project foler in the Julia REPL (e.g. type `cd("Project1")` if you are starting from the FDSE folder. 
-2. Enter the package manager interface by pressing the `]` key. The `julia>` prompt should change to `pkg>` to indicate that the package manager is active.
-3. Type `activate environment` and press return
-4. Type `instantiate` and press return. (Note that if you don't already have the required packages installed on your computer, this step will take some time as the required packages are downloaded  and pre-compiled. However, this step should be very fast afterwards.)
-5. Use the `delete` key to exit the package manager
+1. Enter the package manager interface by pressing the `]` key. The `julia>` prompt should change to `pkg>` to indicate that the package manager is active.
+2. Type `activate .` and press return
+3. Type `instantiate` and press return. (Note that if you don't already have the required packages installed on your computer, this step will take some time as the required packages are downloaded  and pre-compiled. However, this step should be very fast afterwards.)
+4. Use the `delete` key to exit the package manager
+5. Navigate to the project foler in the Julia REPL (e.g. type `cd("Project1")`)
 
 Now we're ready to run Oceananigans! 🙌 To do this:
 1. In the Explorer window of VS Code, navigate into the Project1 directory. If you don't see the FDSE folder, you can open it from GitHub Desktop using the Repository menu and selecting `Open in Visual Studio Code`
