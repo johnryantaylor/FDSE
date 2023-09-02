@@ -8,27 +8,21 @@ Tracers
 * Zooplankton (predator): Z 
 """
 
-using OceanBioME: ContinuousFormBiogeochemistry
+using Oceananigans.Biogeochemistry: AbstractContinuousFormBiogeochemistry
 
 import Oceananigans.Biogeochemistry: required_biogeochemical_tracers,
-                                     required_biogeochemical_auxiliary_fields,
-                                     update_biogeochemical_state!,
-                                     biogeochemical_drift_velocity,
-                                     biogeochemical_auxiliary_fields
+                                     biogeochemical_drift_velocity
 
 # The following struct defines the default values of the parameters (which can be overridden by the user)
-@kwdef struct PhytoplanktonZooplankton{FT, LA, S, W, P} <:ContinuousFormBiogeochemistry{LA, S, P}
+@kwdef struct PhytoplanktonZooplankton{FT, W} <: AbstractContinuousFormBiogeochemistry
     phytoplankton_growth_rate :: FT = 1.0   
-    grazing_rate :: FT = 1.0 
-    grazing_efficiency :: FT = 0.5   
-    zooplankton_mortality_rate :: FT = 0.25
-    light_decay_length :: FT = 0.2
-    light_amplitude :: FT = 1.0
+                 grazing_rate :: FT = 1.0 
+           grazing_efficiency :: FT = 0.5   
+   zooplankton_mortality_rate :: FT = 0.25
+           light_decay_length :: FT = 0.2
+              light_amplitude :: FT = 1.0
 
-    light_attenuation_model :: LA = nothing
-    sediment_model :: S  = nothing
-  sinking_velocity :: W  = 0.0
-         particles :: P  = nothing
+             sinking_velocity :: W  = 0.0
 end   
 
 # The following tells OceanBioME and Oceananigans which tracers are needed
