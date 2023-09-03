@@ -6,7 +6,7 @@ If you are new to Julia, this document contains a quickstart guide:
 https://sje30.github.io/catam-julia/intro/julia-manual.html
 
 If you are familiar with another language (Python, MATLAB, R, C, etc.) then the following guide usefully explains the key differences:
-https://web.mit.edu/julia_v0.6.2/julia/share/doc/julia/html/en/manual/noteworthy-differences.html
+https://docs.julialang.org/en/v1/manual/noteworthy-differences/
 
 Julia is a modern programming language which is as easy to use as python or Matlab, but provides the speed of languages like Fortran and C.
 
