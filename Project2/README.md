@@ -11,25 +11,25 @@ Kelvin-Helmholtz billows developing in a cloud layer over Mount Shasta, Californ
 Here, we will examine the basic stability properties of a stratified shear flow, and will then use Diablo to examine the nonlinear evolution of the unstable state.
 
 Start by considering a stratified shear flow of the form:
-$$
-\mathbf{U}=S_0h \text{tanh}\left(\frac{z-LZ/2}{h}\right)\hat{\imath},
-$$
+
+$$\mathbf{U}=S_0h \text{tanh}\left(\frac{z-LZ/2}{h}\right)\hat{\imath},$$
 and
-$$
-B=N_0^2h \text{tanh}\left(\frac{z-LZ/2}{h}\right),
-$$
+
+$$B=N_0^2h \text{tanh}\left(\frac{z-LZ/2}{h}\right),$$
+
 where $B=-g\rho/\rho_0$ is the buoyancy, $h$ is the height of the shear layer, and $S_0$ and $N_0$ are the shear and buoyancy frequency at the center of the shear layer. The Miles-Howard theorem states that a necessary but not sufficient condition for instability of a stratified, unidirectional, shear flow is that $Ri_g<1/4$ somewhere in the flow, where $Ri_g=N^2/S^2$ is the gradient Richardson number. For the basic state above, the minimum gradient Richardson number is $\text{min}(Ri_g)=N_0^2/S_0^2$.  
 
 ## Linear stability analysis
 Consider the stability of small perturbations the base state defined above: $\mathbf{u}=\mathbf{U}+\epsilon\mathbf{u}'$, $b=B+\epsilon b'$. We can then look for normal mode solutions to the linearised equations of the form
-$$
-v'=\text{Re}\left[\hat{v}(z)\text{exp}(\sigma t+\imath (kx+lz))\right].
-$$
+
+$$v'=\text{Re}\left[\hat{v}(z)\text{exp}(\sigma t+\imath (kx+lz))\right].$$
+
 The Julia script, `linstab.jl`, located inside this folder, solves the viscous linear stability problem for stratified shear flow, returning the vertical velocity and buoyancy eigenfunctions, $\hat{v}(z)$ and $\hat{b}(z)$, and the corresponding growth rates, $\sigma$. Specifically, the code solves the following equations for 2D perturbations ($l=0$):
 
 $$\sigma(d^2_z-k^2)^2 \hat{v}=-\imath k U(z) d^2_z(\hat{v}) + \imath k d^2_z(U) \hat{v} + \nu (d^2_z-k^2)^2 \hat{v}-k^2\hat{b},$$
 
 and
+
 $$\sigma \hat{b}=-d_z(B)\hat{v}-\imath k U(z)\hat{b}+\kappa(d^2_z-k^2)\hat{b}.$$
 
 At the start of `linstab.jl`, you can specify several parameters associated with the basic state and discretization. Select some parameters that permit shear instability by the Miles-Howard theorem (with $Ri=N^2/S^2<1/4$ somewhere in the flow). For example, $LZ=1$, $h=1/10$, $S_0=10$, and $N^2_0=10$ seem to work well.
