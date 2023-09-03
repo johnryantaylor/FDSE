@@ -57,7 +57,7 @@ anim = @animate for (i, iter) in enumerate(iterations)
         v_xz_plot = heatmap(xv, zv, v_xz'; color = :balance, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
         w_xz_plot = heatmap(xw, zw, w_xz'; color = :balance, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
         b_xz_plot = heatmap(xb, zb, b_xz'; color = :thermal, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
-        c_xz_plot = heatmap(xb, zb, c_xz'; color = :thermal, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
+        c_xz_plot = heatmap(xc, zc, c_xz'; color = :thermal, xlabel = "x", ylabel = "z", aspect_ratio = :equal); 
 
     u_title = @sprintf("u, t = %s", round(t));
     v_title = @sprintf("v, t = %s", round(t));
