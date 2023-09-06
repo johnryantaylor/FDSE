@@ -29,6 +29,24 @@ For the recommended installation, follow these steps:
 
 For the next steps, see the README file inside the Project 1 folder.
 
+<details>
+<summary>Alternative setup instructions in GitHub Codespaces</summary>
+   
+An alternative way to run these projects is in [GitHub codespaces](https://github.com/features/codespaces) which is useful if you have problems installing Julia etc.
+
+To run this way:
+1. Fork this repository by clicking the "Fork" button above
+2. In your fork click the "<> Code" button, move to the "Codespaces" tab, then "Creat codespaces on main"
+<img width="421" alt="Screenshot 2023-09-06 at 15 24 55" src="https://github.com/jagoosw/FDSE/assets/26657828/cd90bd7e-33d8-4b02-849f-ed11b8de1a6e">
+
+3. This will open a codespace which may take a while to setup
+4. Once everything has been setup open the command palette by clicking "View > Command Palette", then select "Julia: Start REPL"
+5. Once this is open type `]` to open the package manager, type `instantiate` and return, this will install the required packages and may take a while
+6. Once this is done you can run the project files by opening them in the editor and clicking the run arrow in the top right corner.
+
+You can run codespaces for 60 hours a month with a normal GitHub account, or if you are a student you can [upgrade to GitHub Pro for free](https://education.github.com/pack) which will give you 180 hours a month.
+</details>
+
 I hope you enjoy the projects!
 
 

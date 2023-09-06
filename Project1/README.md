@@ -5,7 +5,7 @@ To start, we need to install Oceananigans. To do this, open VS Code (if you don'
 
 Julia has a fantastic built-in package manager for installing and updating add-on packages. Each of the projects has an environment which contains a list of the packages that will be needed for that project. To activate the required packages, follow these steps: 
 1. Enter the package manager interface by pressing the `]` key. The `julia>` prompt should change to `pkg>` to indicate that the package manager is active.
-2. Type `activate .` and press return
+2. Check that the newline in the interface begins `(FDSE) pkg> `, if not you need to type `activate ` followed by the relative path to the FDSE folder (i.e. if you are in it then `activate .`, or if you are in a `ProjectN` folder then `activate ..`.
 3. Type `instantiate` and press return. (Note that if you don't already have the required packages installed on your computer, this step will take some time as the required packages are downloaded  and pre-compiled. However, this step should be very fast afterwards.)
 4. Use the `delete` key to exit the package manager
 5. Navigate to the project foler in the Julia REPL (e.g. type `cd("Project1")`)
