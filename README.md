@@ -31,7 +31,8 @@ For the next steps, see the README file inside the Project 1 folder.
 
 <details>
 <summary>Alternative setup instructions in GitHub Codespaces</summary>
-An alternative way to run these projects is in [GitHub Codespaces](https://github.com/features/codespaces) which is useful if you have problems installing Julia etc.
+   
+An alternative way to run these projects is in [GitHub codespaces](https://github.com/features/codespaces) which is useful if you have problems installing Julia etc.
 
 To run this way:
 1. Fork this repository by clicking the "Fork" button above
