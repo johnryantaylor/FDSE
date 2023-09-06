@@ -27,7 +27,7 @@ Re = 5000
 kick = 0.05
 
 # Now, some parameters that will be used for the initial conditions
-xc = Lx / 10 # The location of the 'lock'
+xl = Lx / 10 # The location of the 'lock'
 Lf = Lx / 100 # The width of the initial buoyancy step
 
 # construct a rectilinear grid using an inbuilt Oceananigans function
@@ -68,7 +68,7 @@ model = NonhydrostaticModel(; grid,
 uᵢ(x, y, z) = kick * randn()
 vᵢ(x, y, z) = 0
 wᵢ(x, y, z) = kick * randn()
-bᵢ(x, y, z) = (Δb / 2) * (1 + tanh((x - xc) / Lf))
+bᵢ(x, y, z) = (Δb / 2) * (1 + tanh((x - xl) / Lf))
 cᵢ(x, y, z) = exp(-((x - Lx / 2) / (Lx / 50))^2) # Initialize with a thin tracer (dye) streak in the center of the domain
 
 # Send the initial conditions to the model to initialize the variables
