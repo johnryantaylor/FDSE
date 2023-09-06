@@ -29,6 +29,19 @@ For the recommended installation, follow these steps:
 
 For the next steps, see the README file inside the Project 1 folder.
 
+<details>
+<summary>Alternative setup instructions in GitHub Codespaces</summary>
+An alternative way to run these projects is in [GitHub Codespaces](https://github.com/features/codespaces) which is useful if you have problems installing Julia etc.
+
+To run this way:
+1. Fork this repository by clicking the "Fork" button above
+2. In your fork click the "<> Code" button, move to the "Codespaces" tab, then "Creat codespaces on main"
+3. This will open a codespace which may take a while to setup
+4. Once everything has been setup open the command palette by clicking "View > Command Palette", then select "Julia: Start REPL"
+5. Once this is open type "]" to open the package manager, type "instantiate" and return, this will install the required packages and may take a while
+6. Once this is done you can run the project files by opening them in the editor and clicking the run arrow in the top right corner.
+</details>
+
 I hope you enjoy the projects!
 
 
