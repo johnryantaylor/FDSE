@@ -44,7 +44,7 @@ To run this way:
 5. Once this is open type `]` to open the package manager, type `instantiate` and return, this will install the required packages and may take a while
 6. Once this is done you can run the project files by opening them in the editor and clicking the run arrow in the top right corner.
 
-You can run codespaces for 60hours a month with a normal GitHub account, or if you are a student you can [upgrade to GitHub Pro for free](https://education.github.com/pack) which will give you 180hours a month.
+You can run codespaces for 60 hours a month with a normal GitHub account, or if you are a student you can [upgrade to GitHub Pro for free](https://education.github.com/pack) which will give you 180 hours a month.
 </details>
 
 I hope you enjoy the projects!
