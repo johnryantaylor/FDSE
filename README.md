@@ -40,6 +40,8 @@ To run this way:
 4. Once everything has been setup open the command palette by clicking "View > Command Palette", then select "Julia: Start REPL"
 5. Once this is open type "]" to open the package manager, type "instantiate" and return, this will install the required packages and may take a while
 6. Once this is done you can run the project files by opening them in the editor and clicking the run arrow in the top right corner.
+
+You can run codespaces for 60hours a month with a normal GitHub account, or if you are a student you can [upgrade to GitHub Pro for free](https://education.github.com/pack) which will give you 180hours a month.
 </details>
 
 I hope you enjoy the projects!
