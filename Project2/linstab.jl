@@ -1,6 +1,6 @@
 # This script analyzes the linear stability of a viscous stratified shear flow
 # using the SSF.jl solver written (in MATLAB) by William Smyth
-using Plotly
+using Plotly: plot as PlotlyPlot
 using Statistics # used in SSF.jl
 using LinearAlgebra  # used in SSF.jl
 
@@ -50,5 +50,5 @@ for (k, k_val) in enumerate(kx)
     (sigma[:, k], lambda_w[:, :, k], lambda_b[:, :, k]) = SSF(z, vel, buoy, k_val, 0, nu, kappa, [0, 0], [0, 0], 0)
 end
 
-Plotly.plot(kx, real.(sigma[1, :]), Layout(xaxis_title="kₓ",yaxis_title="growth rate",plot_bgcolor="white",yaxis=attr(gridcolor="lightgrey",zerolinecolor="black"),xaxis=attr(gridcolor="lightgrey",zerolinecolor="black")))
+PlotlyPlot(kx, real.(sigma[1, :]), Layout(xaxis_title="kₓ",yaxis_title="growth rate",plot_bgcolor="white",yaxis=attr(gridcolor="lightgrey",zerolinecolor="black"),xaxis=attr(gridcolor="lightgrey",zerolinecolor="black")))
 
