@@ -9,6 +9,7 @@ Tracers
 """
 
 using Oceananigans.Biogeochemistry: AbstractContinuousFormBiogeochemistry
+using Oceananigans.Fields: ConstantField
 
 import Oceananigans.Biogeochemistry: required_biogeochemical_tracers,
                                      biogeochemical_drift_velocity
@@ -56,6 +57,6 @@ end
 using Oceananigans.Fields: ZeroField, ConstantField
 
 biogeochemical_drift_velocity(bgc::PhytoplanktonZooplankton, ::Val{:P}) =
-    (u = ZeroField(), v = ZeroField(), w = bgc.sinking_velocity)
+    (u = ZeroField(), v = ZeroField(), w = ConstantField(bgc.sinking_velocity))
 
 
