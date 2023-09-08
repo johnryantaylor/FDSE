@@ -22,15 +22,15 @@ where $B=-g\rho/\rho_0$ is the buoyancy, $h$ is the height of the shear layer, a
 ## Linear stability analysis
 Consider the stability of small perturbations the base state defined above: $\mathbf{u}=\mathbf{U}+\epsilon\mathbf{u}'$, $b=B+\epsilon b'$. We can then look for normal mode solutions to the linearised equations of the form
 
-$$v'=\text{Re}\left[\hat{v}(z)\text{exp}(\sigma t+\imath (kx+lz))\right].$$
+$$u'=\text{Re}\left[\hat{u}(z)\text{exp}(\sigma t+\imath (kx+lz))\right].$$
 
-The Julia script, `linstab.jl`, located inside this folder, solves the viscous linear stability problem for stratified shear flow, returning the vertical velocity and buoyancy eigenfunctions, $\hat{v}(z)$ and $\hat{b}(z)$, and the corresponding growth rates, $\sigma$. Specifically, the code solves the following equations for 2D perturbations ($l=0$):
+The Julia script, `linstab.jl`, located inside this folder, solves the viscous linear stability problem for stratified shear flow, returning the vertical velocity and buoyancy eigenfunctions, $\hat{u}(z)$ and $\hat{b}(z)$, and the corresponding growth rates, $\sigma$. Specifically, the code solves the following equations for 2D perturbations ($l=0$):
 
-$$\sigma(d^2_z-k^2)^2 \hat{v}=-\imath k U(z) d^2_z(\hat{v}) + \imath k d^2_z(U) \hat{v} + \nu (d^2_z-k^2)^2 \hat{v}-k^2\hat{b},$$
+$$\sigma(d^2_z-k^2)^2 \hat{u}=-\imath k U(z) d^2_z(\hat{u}) + \imath k d^2_z(U) \hat{u} + \nu (d^2_z-k^2)^2 \hat{u}-k^2\hat{b},$$
 
 and
 
-$$\sigma \hat{b}=-d_z(B)\hat{v}-\imath k U(z)\hat{b}+\kappa(d^2_z-k^2)\hat{b}.$$
+$$\sigma \hat{b}=-d_z(B)\hat{u}-\imath k U(z)\hat{b}+\kappa(d^2_z-k^2)\hat{b}.$$
 
 At the start of `linstab.jl`, you can specify several parameters associated with the basic state and discretization. Select some parameters that permit shear instability by the Miles-Howard theorem (with $Ri=N^2/S^2<1/4$ somewhere in the flow). For example, $LZ=1$, $h=1/10$, $S_0=10$, and $N^2_0=10$ seem to work well.
 
