@@ -43,16 +43,16 @@ Consider the timescales involved in this system associated with advection, diffu
 # Suggested further investigations
 
 ## Buoyant / sinking phytoplankton
-Often phytoplankton cells are slightly more or less dense than the surrounding seawater, causing them to slowly sink or rise in the absence of vertical currents. There is a parameter in `PZ.jl` called `sinking_speed` which causes the phytoplankton to rise or sink with a prescribed velocity relative to the surrounding water (note that positive values of the parameter correspond to rising motion and negative values correspond to sinking motion). Try changing this parameter and explore the consequences on the predator-prey system. You can explore the effect of this change both in `PZ_column.jl` and `PZ_cavity.jl`. Note that you might need to reduce the size of the timestep to prevent numerical instabilities.
+Often phytoplankton cells are slightly more or less dense than the surrounding seawater, causing them to slowly sink or rise in the absence of vertical currents. There is a parameter in `PZ.jl` called `sinking_velocity` which causes the phytoplankton to rise or sink with a prescribed vertical velocity relative to the surrounding water (note that positive values of the parameter correspond to rising motion and negative values correspond to sinking motion). Try changing this parameter and explore the consequences on the predator-prey system. You can explore the effect of this change both in `PZ_column.jl` and `PZ_cavity.jl`. Note that you might need to reduce the size of the timestep to prevent numerical instabilities.
 
-You may also find it necessary to define the sinking velocity so that it goes to zero at the top and bottom of the domain to prevent erroneous numerical effects (e.g. the concentration becoming negative). To-do this you can use a function field, for example:
+Note that in order to conserve total phytoplankton in our domain, it necessary to define the sinking velocity so that it goes to zero at the top and bottom boundaries. To do this, we can use a function field so that the sinking velocity will be a function of space. For example:
 ```julia
 λ = 0.1
 w₀ = 0.05
 
 w_sinking(x, y, z, params) = - params.w₀ * (tanh(z/params.λ) - tanh((-z - 1)/params.λ) - 1)
 
-sinking_speed = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid; parameters = (; λ, w₀))
+sinking_velocity = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid; parameters = (; λ, w₀))
 ```
 
 ## PZ model formulation
