@@ -21,7 +21,7 @@ w_bcs = FieldBoundaryConditions(east = ValueBoundaryCondition(0.0), west = Value
 # Construct the model using Oceananigans with the biogeochemistry handled by OceanBioME
 model = NonhydrostaticModel(; grid,
                               advection = UpwindBiasedFifthOrder(),
-                              biogeochemistry = PhytoplanktonZooplankton(sinking_speed = 0.5),
+                              biogeochemistry = PhytoplanktonZooplankton(sinking_speed = -0.1),
                               closure = ScalarDiffusivity(ν = κₜ, κ = κₜ),
                               boundary_conditions = (u = u_bcs, w = w_bcs))
 

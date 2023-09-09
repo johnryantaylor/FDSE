@@ -57,6 +57,6 @@ end
 using Oceananigans.Fields: ZeroField, ConstantField
 
 biogeochemical_drift_velocity(bgc::PhytoplanktonZooplankton, ::Val{:P}) =
-    (u = ZeroField(), v = ZeroField(), w = ConstantField(- bgc.sinking_speed))
+    (u = ZeroField(), v = ZeroField(), w = ConstantField(bgc.sinking_speed))
 
 
