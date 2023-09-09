@@ -18,10 +18,17 @@ grid = RectilinearGrid(topology = (Bounded, Flat, Bounded), size = (100, 100, ),
 u_bcs = FieldBoundaryConditions(top = ValueBoundaryCondition(vel_top), bottom = ValueBoundaryCondition(0.0))
 w_bcs = FieldBoundaryConditions(east = ValueBoundaryCondition(0.0), west = ValueBoundaryCondition(0.0))
 
+λ = 0.1
+w₀ = 0.05
+
+w_sinking(x, y, z) = - w₀ * (tanh(z/λ) - tanh((-z - 1)/λ) - 1)
+
+sinking_velocity = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid)
+
 # Construct the model using Oceananigans with the biogeochemistry handled by OceanBioME
 model = NonhydrostaticModel(; grid,
                               advection = UpwindBiasedFifthOrder(),
-                              biogeochemistry = PhytoplanktonZooplankton(),
+                              biogeochemistry = PhytoplanktonZooplankton(; sinking_velocity),
                               closure = ScalarDiffusivity(ν = κₜ, κ = κₜ),
                               boundary_conditions = (u = u_bcs, w = w_bcs))
 

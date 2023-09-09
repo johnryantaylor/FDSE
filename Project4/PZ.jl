@@ -22,7 +22,7 @@ import Oceananigans.Biogeochemistry: required_biogeochemical_tracers,
            light_decay_length :: FT = 0.2
               light_amplitude :: FT = 1.0
 
-             sinking_velocity :: W  = 0.0
+                sinking_velocity :: W  = ZeroField()
 end   
 
 # The following tells OceanBioME and Oceananigans which tracers are needed
