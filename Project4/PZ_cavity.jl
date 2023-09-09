@@ -23,12 +23,12 @@ w₀ = 0.05
 
 w_sinking(x, y, z) = - w₀ * (tanh(z/λ) - tanh((-z - 1)/λ) - 1)
 
-sinking_speed = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid)
+sinking_velocity = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid)
 
 # Construct the model using Oceananigans with the biogeochemistry handled by OceanBioME
 model = NonhydrostaticModel(; grid,
                               advection = UpwindBiasedFifthOrder(),
-                              biogeochemistry = PhytoplanktonZooplankton(; sinking_speed),
+                              biogeochemistry = PhytoplanktonZooplankton(; sinking_velocity),
                               closure = ScalarDiffusivity(ν = κₜ, κ = κₜ),
                               boundary_conditions = (u = u_bcs, w = w_bcs))
 
