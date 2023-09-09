@@ -23,7 +23,7 @@ import Oceananigans.Biogeochemistry: required_biogeochemical_tracers,
            light_decay_length :: FT = 0.2
               light_amplitude :: FT = 1.0
 
-             sinking_velocity :: W  = 0.0
+                sinking_speed :: W  = 0.0
 end   
 
 # The following tells OceanBioME and Oceananigans which tracers are needed
@@ -57,6 +57,6 @@ end
 using Oceananigans.Fields: ZeroField, ConstantField
 
 biogeochemical_drift_velocity(bgc::PhytoplanktonZooplankton, ::Val{:P}) =
-    (u = ZeroField(), v = ZeroField(), w = ConstantField(bgc.sinking_velocity))
+    (u = ZeroField(), v = ZeroField(), w = ConstantField(- bgc.sinking_speed))
 
 
