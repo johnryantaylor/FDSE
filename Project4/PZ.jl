@@ -28,9 +28,7 @@ end
 # The following tells OceanBioME and Oceananigans which tracers are needed
 required_biogeochemical_tracers(::PhytoplanktonZooplankton) = (:P, :Z)
 
-function light(a,λ,z)
-    a * exp(z/λ)    
-end  
+@inline light(a,λ,z) = a * exp(z / λ)
 
 # The following function defines the forcing (RHS) for the phytoplankton (prey)
 # Note that when running as a box model (PZ_box.jl), z = 0
@@ -41,7 +39,7 @@ end
     γ = bgc.zooplankton_mortality_rate
     λ = bgc.light_decay_length
     a = bgc.light_amplitude
-    return light(a,λ,z) * α * P - β * P * Z
+    return light(a, λ, z) * α * P - β * P * Z
 end
 
 # The following function defines the forcing (RHS) for the zooplankton (predator)
@@ -50,7 +48,7 @@ end
     β = bgc.grazing_rate
     δ = bgc.grazing_efficiency
     γ = bgc.zooplankton_mortality_rate
-    return β *δ * P * Z - γ * Z
+    return β * δ * P * Z - γ * Z
 end
 
 using Oceananigans.Fields: ZeroField, ConstantField
