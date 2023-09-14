@@ -8,7 +8,7 @@ Although most natural flows are time-varying, and have complicated spatial struc
 Kelvin-Helmholtz billows developing in a cloud layer over Mount Shasta, California. Photo copyright 1999, Beverly Shannon.
 
 ## Introduction
-Here, we will examine the basic stability properties of a stratified shear flow, and will then use Diablo to examine the nonlinear evolution of the unstable state.
+Here, we will examine the basic stability properties of a stratified shear flow, and will then use Oceananigans to examine the nonlinear evolution of the unstable state.
 
 Start by considering a stratified shear flow of the form:
 
