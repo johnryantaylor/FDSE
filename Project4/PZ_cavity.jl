@@ -21,7 +21,7 @@ w_bcs = FieldBoundaryConditions(east = ValueBoundaryCondition(0.0), west = Value
 λ = 0.1
 w₀ = 0.05
 
-w_sinking(x, y, z) = - w₀ * (tanh(z/λ) - tanh((-z - 1)/λ) - 1)
+w_sinking(x, y, z) = - w₀ * (tanh(-z / λ) - tanh((-z - 1) / λ) - 1)
 
 sinking_velocity = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid)
 
