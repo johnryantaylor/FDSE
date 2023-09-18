@@ -10,6 +10,29 @@ https://docs.julialang.org/en/v1/manual/noteworthy-differences/
 
 Julia is a modern programming language which is as easy to use as python or Matlab, but provides the speed of languages like Fortran and C.
 
+There are two ways of working with the projects in this repository: you can either install the required software on your own computer, or run the code in a browser using GitHub Codespaces. If you want to spend time going through the projects and tinker with the code, then we recommend downloding on your own computer. The projects have been designed to run quickly even on slow laptops.
+
+<details>
+<summary>Instructions to run FDSE projects on GitHub Codespaces</summary>
+   
+The instructions below describe how to run the projects using [GitHub codespaces](https://github.com/features/codespaces), which is useful if you don't have Julia installed and want to have a quick look at the projects, or have problems installing Julia.
+
+To run this way:
+1. Fork this repository by clicking the "Fork" button above
+2. In your fork click the "<> Code" button, move to the "Codespaces" tab, then "Creat codespaces on main"
+<img width="421" alt="Screenshot 2023-09-06 at 15 24 55" src="https://github.com/jagoosw/FDSE/assets/26657828/cd90bd7e-33d8-4b02-849f-ed11b8de1a6e">
+
+3. This will open a codespace which may take a while to setup
+4. Once everything has been setup open the command palette by clicking "View > Command Palette", then select "Julia: Start REPL"
+5. Once this is open type `]` to open the package manager, type `instantiate` and return, this will install the required packages and may take a while
+6. Once this is done you can run the project files by opening them in the editor and clicking the run arrow in the top right corner.
+
+You can run codespaces for 60 hours a month with a normal GitHub account, or if you are a student you can [upgrade to GitHub Pro for free](https://education.github.com/pack) which will give you 180 hours a month.
+</details>
+
+<details>
+<summary>Instructions to install and run on your own computer</summary>
+
 Julia comes with a REPL (which stands for read-evaluate-print-loop) which provides a command-line interface much like python or Matlab. While it is possible to use this on its own, we suggest using a code development platform which provides a single tool to edit and run the scripts and display plots. In particular, we recommend Visual Studio Code which is an excellent tool and free to use.
 
 For the recommended installation, follow these steps:
@@ -27,25 +50,9 @@ For the recommended installation, follow these steps:
 14. Find and install the Julia Language Support extension in VS code
 15. Find and install the GitHub Pull Requests and Issues extension in VS code
 
-For the next steps, see the README file inside the Project 1 folder.
-
-<details>
-<summary>Alternative setup instructions in GitHub Codespaces</summary>
-   
-An alternative way to run these projects is in [GitHub codespaces](https://github.com/features/codespaces) which is useful if you have problems installing Julia etc.
-
-To run this way:
-1. Fork this repository by clicking the "Fork" button above
-2. In your fork click the "<> Code" button, move to the "Codespaces" tab, then "Creat codespaces on main"
-<img width="421" alt="Screenshot 2023-09-06 at 15 24 55" src="https://github.com/jagoosw/FDSE/assets/26657828/cd90bd7e-33d8-4b02-849f-ed11b8de1a6e">
-
-3. This will open a codespace which may take a while to setup
-4. Once everything has been setup open the command palette by clicking "View > Command Palette", then select "Julia: Start REPL"
-5. Once this is open type `]` to open the package manager, type `instantiate` and return, this will install the required packages and may take a while
-6. Once this is done you can run the project files by opening them in the editor and clicking the run arrow in the top right corner.
-
-You can run codespaces for 60 hours a month with a normal GitHub account, or if you are a student you can [upgrade to GitHub Pro for free](https://education.github.com/pack) which will give you 180 hours a month.
 </details>
+
+For the next steps, see the README file inside the Project 1 folder.
 
 I hope you enjoy the projects!
 
