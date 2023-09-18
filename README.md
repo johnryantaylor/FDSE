@@ -56,6 +56,7 @@ For the next steps, see the README file inside the Project 1 folder.
 
 I hope you enjoy the projects!
 
+John Taylor
 
 
 
