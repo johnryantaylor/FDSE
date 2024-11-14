@@ -25,7 +25,7 @@ model = NonhydrostaticModel(; grid,
               advection = UpwindBiasedFifthOrder(),   # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
             timestepper = :RungeKutta3,   # Set the timestepping scheme, here 3rd order Runge-Kutta
                 tracers = :c,
-                coriolis = BetaPlane(rotation_rate = 7.292115e-5, latitude = 0, radius = 6371e3)   # set Coriolis parameter using the Beta-plane approximation 
+                coriolis = BetaPlane(rotation_rate = 7.292115e-5, latitude = 45, radius = 6371e3)   # set Coriolis parameter using the Beta-plane approximation 
 )
 
 # Set wavenumbers associated with the initial condition

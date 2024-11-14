@@ -62,7 +62,7 @@ simulation = Simulation(model, Δt = max_Δt, stop_time = duration)
 # ### The `TimeStepWizard`
 wizard = TimeStepWizard(cfl = 0.85, max_change = 1.1, max_Δt = max_Δt)
 simulation.callbacks[:wizard] = Callback(wizard, IterationInterval(10))
-:w
+
 # ### A progress messenger
 start_time = time_ns()
 progress(sim) = @printf("i: % 6d, sim time: % 10s, wall time: % 10s, Δt: % 10s, CFL: %.2e\n",

@@ -7,13 +7,20 @@ using Printf
 include("PZ.jl")
 
 # Set the diffusion coefficient
-κₜ = 0.0
+κₜ = 1e-4
 
 # define the grid
 grid = RectilinearGrid(topology = (Flat, Flat, Bounded), size = (100, ), extent = (1, ))
 
+λ = 0.1
+w₀ = 0.01
+
+w_sinking(x, y, z) = - w₀ * (tanh(z/λ) - tanh((-z - 1)/λ) - 1)
+
+sinking_velocity = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid)
+
 # Specify the biogeochemical model
-biogeochemistry = PhytoplanktonZooplankton()
+biogeochemistry = PhytoplanktonZooplankton(sinking_velocity = sinking_velocity)
 # To change the e-folding decay length for the light, replace with the following
 #biogeochemistry = PhytoplanktonZooplankton(light_decay_length=0.1)
 
@@ -25,7 +32,7 @@ model = NonhydrostaticModel(; grid,
 set!(model, P = 0.1, Z = 0.1)
 
 # Set up the simulation with the timestep and stop time
-simulation = Simulation(model, Δt = 0.01, stop_time = 500)
+simulation = Simulation(model, Δt = 0.01, stop_time = 50)
 
 # Create an 'output_writer' to save data periodically
 simulation.output_writers[:tracers] = JLD2OutputWriter(model, model.tracers,
@@ -57,8 +64,8 @@ xc, yc, zc = nodes(grid, Center(), Center(), Center())
 # Extract an array of times when the data was saved
 times = P.times
 
-hmP = heatmap(times , zc, log10.(abs.(P[1, 1, 1:grid.Nz, 1:end])), xlabel = "time", ylabel = "z (m)", title="log10(Phytoplankton)")
+hmP = heatmap(times , zc, ((P[1, 1, 1:grid.Nz, 1:end])), xlabel = "time", ylabel = "z (m)", title="(Phytoplankton)", clims=(0,1))
 
-hmZ = heatmap(times , zc, log10.(abs.(Z[1, 1, 1:grid.Nz, 1:end])), xlabel = "time", ylabel = "z (m)", title="log10(Zooplankton)")
+hmZ = heatmap(times , zc, ((Z[1, 1, 1:grid.Nz, 1:end])), xlabel = "time", ylabel = "z (m)", title="(Zooplankton)")
 
 plot(hmP, hmZ, layout=(2,1))
