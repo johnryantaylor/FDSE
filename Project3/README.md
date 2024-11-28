@@ -7,8 +7,11 @@ Rossby waves are important features of the large-scale flow in the ocean and atm
 ECMWF geopotential height map showing atmospheric Rossby waves (left) and ocean eddies visible in the phytoplankton concentration off the California coast (right)
 
 Consider flow in a 2D plane, normal to the axis of rotation. In the next section, you will use Oceananigans to simulate flow in this plane. Consider small perturbations to a constant flow in the $x$-direction, $U$. Linearizing about the constant background flow, we have the following equations:
+
 $$u'_t+Uu'_x - f(y) v' = -\frac{1}{\rho_0} p_x,$$
+
 $$v'_t+Uv'_x + f(y) u' = -\frac{1}{\rho_0} p_y,$$
+
 $$u'_x+v'_y=0.$$
 
 Here, we will consider flow on the so-called $\beta$-plane, where the Coriolis parameter is approximated as $f\simeq f_0+\beta y$ (retaining the first two terms in a Taylor series expansion of $f(y)$ ). Since the flow is two-dimensional, it can be described by a streamfunction, $\psi'$, where $u'=-\psi'_y$, $v'=\psi'_x$. Taking the curl of the momentum equations to eliminate pressure gives
