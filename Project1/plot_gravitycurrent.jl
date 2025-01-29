@@ -50,7 +50,7 @@ anim = @animate for (i, iter) in enumerate(iterations)
     t = file_xz["timeseries/t/$iter"];
 
     # Save some variables to plot at the end
-    b_bottom[:,i] = b_xz[:, 1, 1]; # This is the buouyancy along the bottom wall
+    b_bottom[:,i] = b_xz[:, 3, 1]; # This is the buouyancy along the bottom wall
     t_save[i] = t # save the time
 
         u_xz_plot = heatmap(xu, zu, u_xz'; color = :balance, xlabel = "x", ylabel = "z", aspect_ratio = :equal);  
