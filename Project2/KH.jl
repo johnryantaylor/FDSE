@@ -38,20 +38,20 @@ grid = RectilinearGrid(size = (Nx, Nz), x = (0, Lx), z = (0, Lz), topology = (Pe
 
 # Now, define a 'model' where we specify the grid, advection scheme, bcs, and other settings
 model = NonhydrostaticModel(; grid,
-              advection = UpwindBiasedFifthOrder(),  # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
+              advection = UpwindBiased(),  # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
             timestepper = :RungeKutta3, # Set the timestepping scheme, here 3rd order Runge-Kutta
                 tracers = (:b),  # Set the name(s) of any tracers, here b is buoyancy
-               buoyancy = Buoyancy(model=BuoyancyTracer()), # this tells the model that b will act as the buoyancy (and influence momentum) 
+               buoyancy = BuoyancyTracer(), # this tells the model that b will act as the buoyancy (and influence momentum) 
                 closure = (ScalarDiffusivity(ν = 1 / Re, κ = 1 / Re)),  # set a constant kinematic viscosity and diffusivty, here just 1/Re since we are solving the non-dimensional equations 
                 coriolis = nothing # this line tells the mdoel not to include system rotation (no Coriolis acceleration)
 )
 
 # Set initial conditions
 # Here, we start with a tanh function for buoyancy and add a random perturbation to the velocity. 
-uᵢ(x, y, z) = S₀ * h * tanh( (z - Lz/2) / h) + kick * randn()
-vᵢ(x, y, z) = 0
-wᵢ(x, y, z) = kick * randn()
-bᵢ(x, y, z) = N₀^2 * h * tanh( (z - Lz/2) / h) + kick * randn()
+uᵢ(x, z) = S₀ * h * tanh( (z - Lz/2) / h) + kick * randn()
+vᵢ(x, z) = 0
+wᵢ(x, z) = kick * randn()
+bᵢ(x, z) = N₀^2 * h * tanh( (z - Lz/2) / h) + kick * randn()
 
 # Send the initial conditions to the model to initialize the variables
 set!(model, u = uᵢ, v = vᵢ, w = wᵢ, b = bᵢ)

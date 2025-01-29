@@ -54,10 +54,10 @@ b_bcs = FieldBoundaryConditions(top = FluxBoundaryCondition(0),
 
 # Now, define a 'model' where we specify the grid, advection scheme, bcs, and other settings
 model = NonhydrostaticModel(; grid,
-              advection = UpwindBiasedFifthOrder(),  # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
+              advection = UpwindBiased(),  # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
             timestepper = :RungeKutta3, # Set the timestepping scheme, here 3rd order Runge-Kutta
                 tracers = (:b, :c),  # Set the name(s) of any tracers, here b is buoyancy and c is a passive tracer (e.g. dye)
-               buoyancy = Buoyancy(model=BuoyancyTracer()), # this tells the model that b will act as the buoyancy (and influence momentum) 
+               buoyancy = BuoyancyTracer(), # this tells the model that b will act as the buoyancy (and influence momentum) 
                 closure = (ScalarDiffusivity(ν = 1 / Re, κ = 1 / Re)),  # set a constant kinematic viscosity and diffusivty, here just 1/Re since we are solving the non-dimensional equations 
     boundary_conditions = (u = u_bcs, w = w_bcs, b = b_bcs), # specify the boundary conditions that we defiend above
                coriolis = nothing # this line tells the mdoel not to include system rotation (no Coriolis acceleration)
@@ -65,11 +65,11 @@ model = NonhydrostaticModel(; grid,
 
 # Set initial conditions
 # Here, we start with a tanh function for buoyancy and add a random perturbation to the velocity. 
-uᵢ(x, y, z) = kick * randn()
-vᵢ(x, y, z) = 0
-wᵢ(x, y, z) = kick * randn()
-bᵢ(x, y, z) = (Δb / 2) * (1 + tanh((x - xl) / Lf))
-cᵢ(x, y, z) = exp(-((x - Lx / 2) / (Lx / 50))^2) # Initialize with a thin tracer (dye) streak in the center of the domain
+uᵢ(x, z) = kick * randn()
+vᵢ(x, z) = 0
+wᵢ(x, z) = kick * randn()
+bᵢ(x, z) = (Δb / 2) * (1 + tanh((x - xl) / Lf))
+cᵢ(x, z) = exp(-((x - Lx / 2) / (Lx / 50))^2) # Initialize with a thin tracer (dye) streak in the center of the domain
 
 # Send the initial conditions to the model to initialize the variables
 set!(model, u = uᵢ, v = vᵢ, w = wᵢ, b = bᵢ, c = cᵢ)

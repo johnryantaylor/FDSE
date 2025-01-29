@@ -31,18 +31,18 @@ iterations = parse.(Int, keys(file_xz["timeseries/t"]))
 @info "Making an animation from saved data..."
 
 t_save = zeros(length(iterations))
-b_bottom = zeros(length(b_ic[:, 1, 1]), length(iterations))
+b_bottom = zeros(length(b_ic[1:Nx, 1, 1, 1]), length(iterations))
 
 # Here, we loop over all iterations
 anim = @animate for (i, iter) in enumerate(iterations)
 
     @info "Drawing frame $i from iteration $iter..."
 
-    u_xz = file_xz["timeseries/u/$iter"][:, 1, :];
-    v_xz = file_xz["timeseries/v/$iter"][:, 1, :];
-    w_xz = file_xz["timeseries/w/$iter"][:, 1, :];
-    b_xz = file_xz["timeseries/b/$iter"][:, 1, :];
-    c_xz = file_xz["timeseries/c/$iter"][:, 1, :];
+    u_xz = file_xz["timeseries/u/$iter"][1:Nx+1, 1, 1:Nz];
+    v_xz = file_xz["timeseries/v/$iter"][1:Nx, 1, 1:Nz];
+    w_xz = file_xz["timeseries/w/$iter"][1:Nx, 1, 1:Nz+1];
+    b_xz = file_xz["timeseries/b/$iter"][1:Nx, 1, 1:Nz];
+    c_xz = file_xz["timeseries/c/$iter"][1:Nx, 1, 1:Nz];
 
 # If you want an x-y slice, you can get it this way:
     # b_xy = file_xy["timeseries/b/$iter"][:, :, 1];

@@ -22,7 +22,7 @@ grid = RectilinearGrid(size = (Nx, Ny),
 
 # Set up a model for Rossby waves
 model = NonhydrostaticModel(; grid,
-              advection = UpwindBiasedFifthOrder(),   # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
+              advection = UpwindBiased(),   # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
             timestepper = :RungeKutta3,   # Set the timestepping scheme, here 3rd order Runge-Kutta
                 tracers = :c,
                 coriolis = BetaPlane(rotation_rate = 7.292115e-5, latitude = 45, radius = 6371e3)   # set Coriolis parameter using the Beta-plane approximation 
@@ -34,10 +34,10 @@ l = 2 * pi / 200kilometers
 
 # Define functions for the initial conditions
 u₀ = 0.001   # units: m/s
-uᵢ(x, y, z) = u₀ * sin(k * x) * sin(l * y)
-vᵢ(x, y, z) = u₀ * (k / l) * cos(k * x) * cos(l * y)
-wᵢ(x, y, z) = 0
-cᵢ(x, y, z) = sin(k * x) * cos(l * y) # Here, we set the function for c so that it is proportional to the streamfunction associated with (u,v)
+uᵢ(x, z) = u₀ * sin(k * x) * sin(l * y)
+vᵢ(x, z) = u₀ * (k / l) * cos(k * x) * cos(l * y)
+wᵢ(x, z) = 0
+cᵢ(x, z) = sin(k * x) * cos(l * y) # Here, we set the function for c so that it is proportional to the streamfunction associated with (u,v)
 
 # Send the initial conditions to the model to initialize the variables
 set!(model, u = uᵢ, v = vᵢ, w = wᵢ, c = cᵢ)

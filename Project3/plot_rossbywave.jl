@@ -36,10 +36,10 @@ anim = @animate for (i, iter) in enumerate(iterations)
 
     @info "Drawing frame $i from iteration $iter..."
 
-    u_xy = file_xy["timeseries/u/$iter"][:, :, 1];
-    v_xy = file_xy["timeseries/v/$iter"][:, :, 1];
-    w_xy = file_xy["timeseries/w/$iter"][:, :, 1];
-    c_xy = file_xy["timeseries/c/$iter"][:, :, 1];
+    u_xy = file_xy["timeseries/u/$iter"][1:Nx+1, 1:Ny, 1];
+    v_xy = file_xy["timeseries/v/$iter"][1:Nx, 1:Ny+1, 1];
+    w_xy = file_xy["timeseries/w/$iter"][1:Nx, 1:Ny, 1];
+    c_xy = file_xy["timeseries/c/$iter"][1:Nx, 1:Ny, 1];
     
     t = file_xy["timeseries/t/$iter"];
 

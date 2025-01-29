@@ -27,7 +27,7 @@ sinking_velocity = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_s
 
 # Construct the model using Oceananigans with the biogeochemistry handled by OceanBioME
 model = NonhydrostaticModel(; grid,
-                              advection = UpwindBiasedFifthOrder(),
+                              advection = UpwindBiased(),
                               biogeochemistry = PhytoplanktonZooplankton(; sinking_velocity),
                               closure = ScalarDiffusivity(ν = κₜ, κ = κₜ),
                               boundary_conditions = (u = u_bcs, w = w_bcs))
