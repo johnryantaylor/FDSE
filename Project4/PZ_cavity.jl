@@ -49,6 +49,7 @@ simulation.output_writers[:xz_slices] =
                           filename = filename * ".jld2",
                           indices = (:, 1, :),
                          schedule = TimeInterval(0.25),
+                         with_halos = false,
                             overwrite_existing = true)
 
 # ### A progress messenger

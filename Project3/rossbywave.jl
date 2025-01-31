@@ -34,10 +34,10 @@ l = 2 * pi / 200kilometers
 
 # Define functions for the initial conditions
 u₀ = 0.001   # units: m/s
-uᵢ(x, z) = u₀ * sin(k * x) * sin(l * y)
-vᵢ(x, z) = u₀ * (k / l) * cos(k * x) * cos(l * y)
-wᵢ(x, z) = 0
-cᵢ(x, z) = sin(k * x) * cos(l * y) # Here, we set the function for c so that it is proportional to the streamfunction associated with (u,v)
+uᵢ(x, y) = u₀ * sin(k * x) * sin(l * y)
+vᵢ(x, y) = u₀ * (k / l) * cos(k * x) * cos(l * y)
+wᵢ(x, y) = 0
+cᵢ(x, y) = sin(k * x) * cos(l * y) # Here, we set the function for c so that it is proportional to the streamfunction associated with (u,v)
 
 # Send the initial conditions to the model to initialize the variables
 set!(model, u = uᵢ, v = vᵢ, w = wᵢ, c = cᵢ)
@@ -60,7 +60,8 @@ c = model.tracers.c
 simulation.output_writers[:jld2] = JLD2OutputWriter(model, (; u, v, w, c),
                                                     schedule = IterationInterval(10),
                                                     filename = filename * ".jld2",
-                                                    overwrite_existing = true
+                                                    overwrite_existing = true,
+                                                    with_halos = false
 )
 
 # Run the simulation                                                  

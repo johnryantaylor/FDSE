@@ -29,17 +29,17 @@ iterations = parse.(Int, keys(file_xy["timeseries/t"]))
 @info "Making an animation from saved data..."
 
 t_save = zeros(length(iterations))
-u_mid = zeros(length(u_ic[:, 1, 1]), length(iterations))
+u_mid = zeros(length(u_ic[:, 1, 1, 1]), length(iterations))
 
 # Here, we loop over all iterations
 anim = @animate for (i, iter) in enumerate(iterations)
 
     @info "Drawing frame $i from iteration $iter..."
 
-    u_xy = file_xy["timeseries/u/$iter"][1:Nx+1, 1:Ny, 1];
-    v_xy = file_xy["timeseries/v/$iter"][1:Nx, 1:Ny+1, 1];
-    w_xy = file_xy["timeseries/w/$iter"][1:Nx, 1:Ny, 1];
-    c_xy = file_xy["timeseries/c/$iter"][1:Nx, 1:Ny, 1];
+    u_xy = file_xy["timeseries/u/$iter"][:, :, 1];
+    v_xy = file_xy["timeseries/v/$iter"][:, :, 1];
+    w_xy = file_xy["timeseries/w/$iter"][:, :, 1];
+    c_xy = file_xy["timeseries/c/$iter"][:, :, 1];
     
     t = file_xy["timeseries/t/$iter"];
 
