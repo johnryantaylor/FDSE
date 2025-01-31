@@ -115,7 +115,8 @@ simulation.output_writers[:xz_slices] =
                           filename = filename * ".jld2",
                           indices = (:, 1, :),
                          schedule = TimeInterval(0.2),
-                            overwrite_existing = true)
+                            overwrite_existing = true,
+                            with_halos = false)
 
 # If you are running in 3D, you could save an xy slice like this:                             
 #simulation.output_writers[:xy_slices] =

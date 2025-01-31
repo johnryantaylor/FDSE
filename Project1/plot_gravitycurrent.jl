@@ -38,11 +38,11 @@ anim = @animate for (i, iter) in enumerate(iterations)
 
     @info "Drawing frame $i from iteration $iter..."
 
-    u_xz = file_xz["timeseries/u/$iter"][1:Nx+1, 1, 1:Nz];
-    v_xz = file_xz["timeseries/v/$iter"][1:Nx, 1, 1:Nz];
-    w_xz = file_xz["timeseries/w/$iter"][1:Nx, 1, 1:Nz+1];
-    b_xz = file_xz["timeseries/b/$iter"][1:Nx, 1, 1:Nz];
-    c_xz = file_xz["timeseries/c/$iter"][1:Nx, 1, 1:Nz];
+    u_xz = file_xz["timeseries/u/$iter"][:, 1, :];
+    v_xz = file_xz["timeseries/v/$iter"][:, 1, :];
+    w_xz = file_xz["timeseries/w/$iter"][:, 1, :];
+    b_xz = file_xz["timeseries/b/$iter"][:, 1, :];
+    c_xz = file_xz["timeseries/c/$iter"][:, 1, :];
 
 # If you want an x-y slice, you can get it this way:
     # b_xy = file_xy["timeseries/b/$iter"][:, :, 1];
@@ -50,7 +50,7 @@ anim = @animate for (i, iter) in enumerate(iterations)
     t = file_xz["timeseries/t/$iter"];
 
     # Save some variables to plot at the end
-    b_bottom[:,i] = b_xz[:, 3, 1]; # This is the buouyancy along the bottom wall
+    b_bottom[:,i] = b_xz[:, 1, 1]; # This is the buouyancy along the bottom wall
     t_save[i] = t # save the time
 
         u_xz_plot = heatmap(xu, zu, u_xz'; color = :balance, xlabel = "x", ylabel = "z", aspect_ratio = :equal);  
@@ -66,7 +66,7 @@ anim = @animate for (i, iter) in enumerate(iterations)
     c_title = @sprintf("c (dye), t = %s", round(t));
 
 # Combine the sub-plots into a single figure
-    plot(b_xz_plot, c_xz_plot, layout = (2, 1), size = (1600, 400),
+    plot(b_xz_plot, u_xz_plot, layout = (2, 1), size = (1600, 400),
     title = [b_title c_title])
 
     iter == iterations[end] && close(file_xz)

@@ -39,13 +39,13 @@ anim = @animate for (i, iter) in enumerate(iterations)
 
     @info "Drawing frame $i from iteration $iter..."
 
-    u_xz = file_xz["timeseries/u/$iter"][1:Nx+1, 1, 1:Nz];
-    v_xz = file_xz["timeseries/v/$iter"][1:Nx, 1, 1:Nz];
-    w_xz = file_xz["timeseries/w/$iter"][1:Nx, 1, 1:Nz+1];
-    b_xz = file_xz["timeseries/b/$iter"][1:Nx, 1, 1:Nz];
-    ω_xz = file_xz["timeseries/ω/$iter"][1:Nx, 1, 1:Nz+1];
-    χ_xz = file_xz["timeseries/χ/$iter"][1:Nx, 1, 1:Nz];
-    ϵ_xz = file_xz["timeseries/ϵ/$iter"][1:Nx, 1, 1:Nz];
+    u_xz = file_xz["timeseries/u/$iter"][:, 1, :];
+    v_xz = file_xz["timeseries/v/$iter"][:, 1, :];
+    w_xz = file_xz["timeseries/w/$iter"][:, 1, :];
+    b_xz = file_xz["timeseries/b/$iter"][:, 1, :];
+    ω_xz = file_xz["timeseries/ω/$iter"][:, 1, :];
+    χ_xz = file_xz["timeseries/χ/$iter"][:, 1, :];
+    ϵ_xz = file_xz["timeseries/ϵ/$iter"][:, 1, :];
 
     t = file_xz["timeseries/t/$iter"];
 

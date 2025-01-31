@@ -91,8 +91,9 @@ simulation.output_writers[:xz_slices] =
     JLD2OutputWriter(model, (; u, v, w, b, ω, χ, ϵ),
                           filename = filename * ".jld2",
                           indices = (:, 1, :),
-                         schedule = TimeInterval(0.2),
-                            overwrite_existing = true)
+                          schedule = TimeInterval(0.2),
+                          with_halos = false,
+                          overwrite_existing = true)
 
 nothing # hide
 
