@@ -82,7 +82,7 @@ b = model.tracers.b # extract the buoyancy
 
 ω = ∂z(u) - ∂x(w) # The spanwise vorticity
 χ = (1 / (Re * Pr)) * (∂x(b)^2 + ∂z(b)^2) # The dissipation rate of buoyancy variance
-ϵ = (1 / Re) * (∂x(u)^2 + ∂z(u)^2 + ∂x(v)^2 + ∂z(v)^2) # The dissipation rate of kinetic energy
+ϵ = (1 / Re) * (∂x(u)^2 + ∂z(u)^2 + ∂x(w)^2 + ∂z(w)^2) # The dissipation rate of kinetic energy
 
 # Set the name of the output file
 filename = "KH"
