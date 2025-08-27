@@ -15,7 +15,7 @@ grid = RectilinearGrid(topology = (Flat, Flat, Bounded), size = (100, ), extent 
 λ = 0.1
 w₀ = 0.01
 
-w_sinking(x, y, z) = - w₀ * (tanh(z/λ) - tanh((-z - 1)/λ) - 1)
+w_sinking(z) = - w₀ * (tanh(z/λ) - tanh((-z - 1)/λ) - 1)
 
 sinking_velocity = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid)
 
@@ -35,7 +35,7 @@ set!(model, P = 0.1, Z = 0.1)
 simulation = Simulation(model, Δt = 0.01, stop_time = 50)
 
 # Create an 'output_writer' to save data periodically
-simulation.output_writers[:tracers] = JLD2OutputWriter(model, model.tracers,
+simulation.output_writers[:tracers] = JLD2Writer(model, model.tracers,
                                                        filename = "column_pz.jld2",
                                                        schedule = TimeInterval(1),
                                                        overwrite_existing = true)

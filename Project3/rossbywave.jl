@@ -57,7 +57,7 @@ filename = "rossbywave"
 u, v, w = model.velocities
 c = model.tracers.c
 
-simulation.output_writers[:jld2] = JLD2OutputWriter(model, (; u, v, w, c),
+simulation.output_writers[:jld2] = JLD2Writer(model, (; u, v, w, c),
                                                     schedule = IterationInterval(10),
                                                     filename = filename * ".jld2",
                                                     overwrite_existing = true,

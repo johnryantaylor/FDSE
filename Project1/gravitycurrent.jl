@@ -111,7 +111,7 @@ c = model.tracers.c # extract the tracer
 filename = "gravitycurrent"
 
 simulation.output_writers[:xz_slices] =
-    JLD2OutputWriter(model, (; u, v, w, b, c),
+    JLD2Writer(model, (; u, v, w, b, c),
                           filename = filename * ".jld2",
                           indices = (:, 1, :),
                          schedule = TimeInterval(0.2),
@@ -120,7 +120,7 @@ simulation.output_writers[:xz_slices] =
 
 # If you are running in 3D, you could save an xy slice like this:                             
 #simulation.output_writers[:xy_slices] =
-#    JLD2OutputWriter(model, (; u, v, w, b),
+#    JLD2Writer(model, (; u, v, w, b),
 #                          filename = filename * "_xy.jld2",
 #                          indices = (:,:,10),
 #                        schedule = TimeInterval(0.1),

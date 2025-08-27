@@ -88,7 +88,7 @@ b = model.tracers.b # extract the buoyancy
 filename = "KH"
 
 simulation.output_writers[:xz_slices] =
-    JLD2OutputWriter(model, (; u, v, w, b, ω, χ, ϵ),
+    JLD2Writer(model, (; u, v, w, b, ω, χ, ϵ),
                           filename = filename * ".jld2",
                           indices = (:, 1, :),
                           schedule = TimeInterval(0.2),
