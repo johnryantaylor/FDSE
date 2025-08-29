@@ -988,9 +988,9 @@ version = "1.2.0"
 
 [[deps.OceanBioME]]
 deps = ["Adapt", "Atomix", "CUDA", "GibbsSeaWater", "JLD2", "KernelAbstractions", "Oceananigans", "OffsetArrays", "Roots", "SeawaterPolynomials"]
-git-tree-sha1 = "3575fdb443a3d2b10561714e21f0c5344eb61631"
+git-tree-sha1 = "6678087dc5afcd86b645f74364f146f70979dc42"
 uuid = "a49af516-9db8-4be4-be45-1dad61c5a376"
-version = "0.14.2"
+version = "0.14.3"
 
 [[deps.Oceananigans]]
 deps = ["Adapt", "Crayons", "CubedSphere", "Dates", "Distances", "DocStringExtensions", "FFTW", "GPUArrays", "GPUArraysCore", "Glob", "InteractiveUtils", "IterativeSolvers", "JLD2", "KernelAbstractions", "Krylov", "KrylovPreconditioners", "LinearAlgebra", "Logging", "MPI", "MuladdMacro", "OffsetArrays", "OrderedCollections", "Pkg", "Printf", "Random", "ReactantCore", "Rotations", "SeawaterPolynomials", "SparseArrays", "StaticArrays", "Statistics", "StructArrays"]
