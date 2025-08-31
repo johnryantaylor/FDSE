@@ -1,52 +1,60 @@
-# Project 3: Rossby waves
+# Project 2: Kelvin-Helmholtz instability
 
 ## Background
-Rossby waves are important features of the large-scale flow in the ocean and atmosphere. They arise due to a restoring force associated with latitudinal (north/south) variations in the Coriolis parameter. In this project, we will explore Rossby waves and eddies and their ability to mix and transport tracers.
+Although most natural flows are time-varying, and have complicated spatial structure, important insights can be gained by examining the stability of small amplitude perturbations to simple flows. For example, many identifiable features in the atmosphere and ocean, such as eddies and billow clouds, are generated and derive their properties from fluid instabilities.
 
-![Rossby waves](./images/rossby_fig.jpg)
-ECMWF geopotential height map showing atmospheric Rossby waves (left) and ocean eddies visible in the phytoplankton concentration off the California coast (right)
+![KH-billows over Mt. Shasta](./images/kh-billows.jpg)
 
-Consider flow in a 2D plane, normal to the axis of rotation. In the next section, you will use Oceananigans to simulate flow in this plane. Consider small perturbations to a constant flow in the $x$-direction, $U$. Linearizing about the constant background flow, we have the following equations:
+Kelvin-Helmholtz billows developing in a cloud layer over Mount Shasta, California. Photo copyright 1999, Beverly Shannon.
 
-$$u'_t+Uu'_x - f(y) v' = -\frac{1}{\rho_0} p_x,$$
+## Introduction
+Here, we will examine the basic stability properties of a stratified shear flow, and will then use Oceananigans to examine the nonlinear evolution of the unstable state.
 
-$$v'_t+Uv'_x + f(y) u' = -\frac{1}{\rho_0} p_y,$$
+Start by considering a stratified shear flow of the form:
 
-$$u'_x+v'_y=0.$$
+$$\mathbf{U}=S_0h \text{tanh}\left(\frac{z-LZ/2}{h}\right)\hat{\imath},$$
+and
 
-Here, we will consider flow on the so-called $\beta$-plane, where the Coriolis parameter is approximated as $f\simeq f_0+\beta y$ (retaining the first two terms in a Taylor series expansion of $f(y)$ ). Since the flow is two-dimensional, it can be described by a streamfunction, $\psi'$, where $u'=-\psi'_y$, $v'=\psi'_x$. Taking the curl of the momentum equations to eliminate pressure gives
-$$\nabla^2 \psi'_t+U\nabla^2 \psi'_x + \beta \psi'_x=0.$$
+$$B=N_0^2h \text{tanh}\left(\frac{z-LZ/2}{h}\right),$$
 
-By looking for plane-wave solutions of the form:
-$$\psi'=\psi_0 e^{i(kx+ly-\omega t)},$$
-and inserting this in the equation for $\psi'$ above results in the dispersion equation for Rossby waves:
-$$\omega-kU=-\frac{k\beta}{k^2+l^2}.$$
+where $B=-g\rho/\rho_0$ is the buoyancy, $h$ is the height of the shear layer, and $S_0$ and $N_0$ are the shear and buoyancy frequency at the center of the shear layer. The Miles-Howard theorem states that a necessary but not sufficient condition for instability of a stratified, unidirectional, shear flow is that $Ri_g<1/4$ somewhere in the flow, where $Ri_g=N^2/S^2$ is the gradient Richardson number. For the basic state above, the minimum gradient Richardson number is $\text{min}(Ri_g)=N_0^2/S_0^2$.  
 
-## Simulations of Linear Rossby Waves
-The script `rossbywave.jl` in this folder simulates Rossby waves in dimensional coordinates. Here, $x$ corresponds to the eastward direction, and $y$ points north. A 2D rectilinear grid is set up with a domain size of 1000 kilometers in the $x$ and $y$ directions (approximately 10 degrees in latitude and longitude, respectively). We construct the $\beta$-plane channel by applying free-slip walls at the north and south boundaries and periodic boundary conditions in $x$. Since we want to simulate Rossby waves in dimentional coordinates, we approximate the Coriolis parameter using the BetaPlane function in Oceananigans, which constructs $f(y)$ using the beta-plane approximation using the rotation rate and the radius of the Earth and the latitude of the region we want to simulate. Here, we set the latitude to $45\degree N$.
+## Linear stability analysis
+Consider the stability of small perturbations the base state defined above: $\mathbf{u}=\mathbf{U}+\epsilon\mathbf{u}'$, $b=B+\epsilon b'$. We can then look for normal mode solutions to the linearised equations of the form
 
-To initialize the flow, we choose the wavelengths of the Rossby waves to be 200 kilometers (which is a typical size for mesoscale eddies in the ocean and roughly the size of the ocean eddies in the image above) and set the corresponding wavenumbers $k$ and $l$. We initialize the velocity field using a periodic array of eddies of the form: 
-$$u = u_0 \sin(kx)\sin(ly),$$
-$$v = \frac{u_0 k}{l}\cos(kx)\cos(ly).$$
-where we will start with $u_0=0.001$ m/s so that the dynamics are quasi-linear. Note that $u_x+v_y=0$. Running the script produces a movie of $u$ and creates a Hovmoller diagram by plotting $u$ at $y=Ly/2$ as a function of $x$ and $t$.
+$$u'=\text{Re}\left[\hat{u}(z)\text{exp}(\sigma t+\imath (kx+lz))\right].$$
 
-After running `rossbywave.jl`, watch the movie `rossbywave.mp4`. You should see the waves propagate. Does the direction of propagation match your expecations? You will notice some boundary effects at the north/south ends of the domain where the boundary condition of $v=0$ causes waves to reflect from the boundary.
+The Julia script, `linstab.jl`, located inside this folder, solves the viscous linear stability problem for stratified shear flow, returning the vertical velocity and buoyancy eigenfunctions, $\hat{u}(z)$ and $\hat{b}(z)$, and the corresponding growth rates, $\sigma$. Specifically, the code solves the following equations for 2D perturbations ($l=0$):
 
-Estimate the phase speed of waves using the Hovmoller diagram. How does the phase speed compare to what you estimate from the dispersion relation, given above? Try varying the latitude parameter in the BetaPlane function in `rossbywave.jl`, and/or $k$ and $l$ and repeat the simulation and analysis.
+$$\sigma(d^2_z-k^2)^2 \hat{u}=-\imath k U(z) d^2_z(\hat{u}) + \imath k d^2_z(U) \hat{u} + \nu (d^2_z-k^2)^2 \hat{u}-k^2\hat{b},$$
 
-## Tracer transport by linear and nonlinear Rossby waves
-An important difference between linear (small amplitude) Rossby waves and nonlinear eddies in the ocean and atmosphere is their ability to transport tracers (e.g. temperature, salinity, phytoplankoton, pollutants, etc.) `rossbywave.jl` includes a passive scalar which is proportional to the streamfunction associated with the initial velocity field. Try increasing the amplitude of the initial velocity perturbation. Can you idenfity a transition to nonlinear eddy-like behavior where the eddies trap and transport tracer? For intermediate amplitudes do you see any evidence for a combination of wave and eddy-like characteristcs? 
+and
 
-To gain further insight, add code to `rossbywave.jl` to calculate and save the absolute vorticity, $\omega + f$, where $\omega$ is the relative vorticity, i.e. the curl of the 2D velocity vector. Plot contours of the absolute vorticity for the wave and eddy regimes. What can you conclude about the velocity amplitude where the flow transitions from wave-like to eddy-like?
+$$\sigma \hat{b}=-d_z(B)\hat{u}-\imath k U(z)\hat{b}+\kappa(d^2_z-k^2)\hat{b}.$$
 
-## Suggested Further Investigations
+At the start of `linstab.jl`, you can specify several parameters associated with the basic state and discretization. Select some parameters that permit shear instability by the Miles-Howard theorem (with $Ri=N^2/S^2<1/4$ somewhere in the flow). For example, $LZ=1$, $h=1/10$, $S_0=10$, and $N^2_0=10$ seem to work well.
 
-### Rossby waves on a zonal mean flow
-Try adding a non-zero zonal (east/west) mean flow to your initial conditions (in other words add a function $g(y)$ to $u_i$.) How does this modify the phase speed of the waves? Explore various configurations for the mean flow and the wave perturbations. For example, what happens if the wave perturbations are isolated to a region with zero or non-zero mean flow? How do the waves interact with the mean flow and how does this vary with the amplitude of the waves and the mean flow?
+Optionally, edit these parameters to match your choice of parameters (the suggested ones listed above are in place now.)\\
 
-### Rossby graveyard
-[Zhai et al.](./papers/Zhai.pdf) proposed that a significant amount of energy is dissipated when nonlinear Rossby waves and westward propagating eddies 'break' at western boundaries. Change the topology of the grid to `bounded` in the x-direction. What happens when the Rossby waves encounter the boundary on the western side of the domain? How do the results change when you vary the amplitude of the initial velocity perturbation?
+Note that `linstab.jl` uses a plotting package called `Plotly` which allows interaction with the plot which is useful for this part. Before you run `linstab.jl`, install `Plotly` by typing `]` followed by `add Plotly` in the Julia REPL (the command line interace). 
 
-### Zonal jets
-When the amplitude of the initial perturbation is large, the resulting flow will be highly nonlinear. In 2D (or quasi-geostrophic) turbulence, energy is transferred on average to large scales. On a $\beta$-plane, this eventually manifests in the spontaneous formation of zonal jets, e.g. east/west flow that is also coherent in the east/west direction. This was discussed in a classic paper by [Rhines](./papers/Rhines75.pdf) who proposed that the jets form with a horizontal lengthscale set by $(U/\beta)^{1/2}$. This process is thought to be important in forming the zonal jets (and banded cloud patterns) on Jupiter and the other gas giants. Explore the formation and dynamics of zonal jets by varying the parameters in `rossbywaves.jl`. For a velocity perturbation with a fixed amplitude, how does the number of jets that form depend on $\beta$? Are the jets stationary, or do they meander?
+Now, run the script `linstab.jl` in Julia, which will plot the growth rate of the most unstable mode as a function of the horizontal wavenumber. How does the most unstable mode vary with the shear layer width, and the viscosity?
+
+## Nonlinear simulations
+
+Now, let's simulate K-H instability in Oceananigans. The script `KH.jl` simulates K-H instability with the parameters above. Try running it which should produce a movie showing the development of K-H billows - the nonlinear manifestation of K-H instability.
+
+See if you can verify the growth rate and the most unstable mode that you found from `linstab.jl` in the Oceananigans simulations. Note that the size of the computational domain in the x-direction quantizes the number of wavelengths associated with the perturbations. You should adjust the size of the domain in `KH.jl` to be an integer multiple of the wavelength of the most unstable mode that you found from `linstabl.jl` (be sure to match the other parameters if you changed them). Also, the perturbation that is applied to the velocity field (the parameter `kick` in `KH.jl`) is very large, and you should make it smaller to ensure that the linear approximation used in the linear stability analysis is valid.
+
+Once you are happy that `KH.jl` is capturing the most unstable mode, you can verify that the perturbation growth rate is comparable to the value that you got in `linstab.jl`. An easy way to do this is to plot the logarithm of the vertical velocity variance, $w^2$, as a function of time. Since the basic state has $w=0$, the vertical velocity does not have a contribution from the basic state and the amplitude of $w^2$ should grow like $e^{2\sigma t}$. You will need to add a line of code to calculate and then save the vertical velocity variance. You can do this either in `KH.jl` and save the vertical velocity variance to a file, or do the calculation in `plot_KH.jl` (the latter approach is probably easier). You might also like to plot the evolution of the perturbation kinetic energy (including both $u$ and $w$), where the perturbation is the departure from an x-average. Since $u$ has a non-zero $x$-average, we will need to remove the x-average of $u$ to get the perturbation, $u'$. To calculate an x-average of an array (say `u_xz`), install and use the Statistics package (`] add Statistics` followed by `using Statistics`), and then use `mean(u_xz, dims = 1)` which averages the array `u_xz` over its first dimension (in this case x). Plot a timeseries of the vertical velocity variance or the perturbation kinetic energy and overlay a line or curve indicating the growth rate from `linstab.jl`.
+
+Finally, try making a plot of the gradient Richardson number as a function of depth and time where the shear and buoyancy frequency are calculated from x-averages of the `u` and `b` fields. Note that Oceananigans includes gradient operators, e.g. $\partial z (u)$ returns the derivative of `u` in the vertical direction. How does the value of the gradient Richardson number compare with what you might have expected based on the Miles-Howard theorem.
+
+# Suggested further investigations
+## Mixing efficiency
+In a stratified flows, kinetic energy can be converted to potential energy by mixing the stable density profile, raising the center of mass of the fluid. Some kinetic energy is also lost to viscous dissipation. The mixing efficiency, $\Lambda$,of great interest in the stratified turbulence literature, is the ratio of the kinetic energy used to mix the density profile to the loss to viscous dissipation. Set up and run a simulation of K-H instability using Oceananigans, and let the flow evolve long enough so that it settles back into a non-turbulent state (you may need to decrease the resolution for this, and you might also want to increase the size of the domain in $z$ to minimise boundary effects). Calculate the kinetic and potential energy at the start and end of the simulation, and the change over the simulation, $\Delta KE$ and $\Delta PE$. Calculate the flux coefficient $\Gamma \equiv B/\epsilon \simeq \Delta PE/(-\Delta KE-\Delta PE)$, where $B$ is the buoyancy flux, and $\epsilon$ is the kinetic energy dissipation. Then, use the flux coefficient to estimate the mixing efficiency, $\eta$, using the relation $\Gamma=\eta/(1-\eta)$. Many parameterizations for mixing in the ocean and atmosphere use a constant mixing efficiency with a value close to $\eta \simeq 0.2$. How does your result compare?  Using time series of the kinetic and potential energy, can you estimate the instantaneous mixing efficiency as a function of time?
+
+## Holmboe instability
+When the profiles of shear and stratification are not identical, a second type of instability called 'Holmboe instability' can develop. Specifically, this instability develops when the width of the shear layer is larger than the width of the stratified layer. Holboe instability is characterized by disturbances that propagate relative to the mean flow, while the billows associated with Kelvin-Helmholtz instability remain nearly stationary. Repeat the process used to analyze K-H instability (starting from the linear stability analysis), but use a buoyancy profile where the width of the tanh used to create the initial buoyancy profile is smaller than for the velocity. The parameters listed in Table 1 from [Salehipour et al.](./papers/Salehipour.pdf) should provide a good starting point. Can you identify Holmboe instability based on the stability analysis? Once you find a set of parameters where Holmboe instability grows faster than K-H, try simulating it in Oceananigans. Note that you may need to increase the Reynolds number or Prandtl number in this simulation to prevent the density interface from smearing out too broadly before the simulation begins.
+
 
