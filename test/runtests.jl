@@ -4,10 +4,10 @@
 include("../Project1/gravitycurrent.jl")
 
 @info "Running project 2"
-include("../Project2/KH.jl")
+include("../Project2/rossbywave.jl")
 
 @info "Running project 3"
-include("../Project3/rossbywave.jl")
+include("../Project3/KH.jl")
 
 @info "Running project 4"
 include("../Project4/PZ_box.jl")
