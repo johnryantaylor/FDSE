@@ -1,4 +1,4 @@
-# Project 3: Rossby waves
+# Project 2: Rossby waves
 
 ## Background
 Rossby waves are important features of the large-scale flow in the ocean and atmosphere. They arise due to a restoring force associated with latitudinal (north/south) variations in the Coriolis parameter. In this project, we will explore Rossby waves and eddies and their ability to mix and transport tracers.
