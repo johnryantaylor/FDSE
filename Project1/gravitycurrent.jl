@@ -54,13 +54,13 @@ b_bcs = FieldBoundaryConditions(top = FluxBoundaryCondition(0),
 
 # Now, define a 'model' where we specify the grid, advection scheme, bcs, and other settings
 model = NonhydrostaticModel(; grid,
-              advection = UpwindBiased(),  # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
+            advection = UpwindBiased(),  # Specify the advection scheme.  Another good choice is WENO() which is more accurate but slower
             timestepper = :RungeKutta3, # Set the timestepping scheme, here 3rd order Runge-Kutta
-                tracers = (:b, :c),  # Set the name(s) of any tracers, here b is buoyancy and c is a passive tracer (e.g. dye)
-               buoyancy = BuoyancyTracer(), # this tells the model that b will act as the buoyancy (and influence momentum) 
-                closure = (ScalarDiffusivity(ν = 1 / Re, κ = 1 / Re)),  # set a constant kinematic viscosity and diffusivty, here just 1/Re since we are solving the non-dimensional equations 
-    boundary_conditions = (u = u_bcs, w = w_bcs, b = b_bcs), # specify the boundary conditions that we defiend above
-               coriolis = nothing # this line tells the mdoel not to include system rotation (no Coriolis acceleration)
+            tracers = (:b, :c),  # Set the name(s) of any tracers, here b is buoyancy and c is a passive tracer (e.g. dye)
+            buoyancy = BuoyancyTracer(), # this tells the model that b will act as the buoyancy (and influence momentum) 
+            closure = (ScalarDiffusivity(ν = 1 / Re, κ = 1 / Re)),  # set a constant kinematic viscosity and diffusivty, here just 1/Re since we are solving the non-dimensional equations 
+            boundary_conditions = (u = u_bcs, w = w_bcs, b = b_bcs), # specify the boundary conditions that we defiend above
+            coriolis = nothing # this line tells the model not to include system rotation (no Coriolis acceleration)
 )
 
 # Set initial conditions
