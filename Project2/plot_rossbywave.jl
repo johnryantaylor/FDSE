@@ -53,8 +53,8 @@ anim = @animate for (i, iter) in enumerate(iterations)
     c_title = @sprintf("c, t = %s days", round(t/1day));
 
     u_xy_plot = Plots.heatmap(xu/1e3, yu/1e3, u_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=u_title, fontsize=14);  
-    v_xy_plot = Plots.heatmap(xu/1e3, yu/1e3, u_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=v_title, fontsize=14);  
-    w_xy_plot = Plots.heatmap(xu/1e3, yu/1e3, u_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=w_title, fontsize=14);  
+    v_xy_plot = Plots.heatmap(xu/1e3, yu/1e3, v_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=v_title, fontsize=14);  
+    w_xy_plot = Plots.heatmap(xu/1e3, yu/1e3, w_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=w_title, fontsize=14);  
     c_xy_plot = Plots.heatmap(xc/1e3, yc/1e3, c_xy'; color = :balance, xlabel = "x (km)", ylabel = "y (km)", aspect_ratio = :equal, title=c_title, fontsize=14);  
 
     plot(u_xy_plot, c_xy_plot, layout = (1, 2), size = (1300, 600))
