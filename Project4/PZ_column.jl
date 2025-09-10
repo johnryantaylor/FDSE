@@ -12,17 +12,12 @@ include("PZ.jl")
 # define the grid
 grid = RectilinearGrid(topology = (Flat, Flat, Bounded), size = (100, ), extent = (1, ))
 
-λ = 0.1
-w₀ = 0.01
-
-w_sinking(z) = - w₀ * (tanh(z/λ) - tanh((-z - 1)/λ) - 1)
-
-sinking_velocity = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid)
-
 # Specify the biogeochemical model
-biogeochemistry = PhytoplanktonZooplankton(sinking_velocity = sinking_velocity)
+biogeochemistry = PhytoplanktonZooplankton()
 # To change the e-folding decay length for the light, replace with the following
 #biogeochemistry = PhytoplanktonZooplankton(light_decay_length=0.1)
+# If you want to add sinking of phytoplankton, first define a function called sinking_velocity as explained in the instructions, then call the model like this:
+# biogeochemistry = PhytoplanktonZooplankton(sinking_velocity = sinking_velocity)
 
 # Construct the model using Oceananigans with the biogeochemistry handled by OceanBioME
 model = NonhydrostaticModel(; grid,
