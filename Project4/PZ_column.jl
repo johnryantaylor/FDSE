@@ -7,7 +7,7 @@ using Printf
 include("PZ.jl")
 
 # Set the diffusion coefficient
-κₜ = 1e-4
+κₜ = 0.0
 
 # define the grid
 grid = RectilinearGrid(topology = (Flat, Flat, Bounded), size = (100, ), extent = (1, ))
