@@ -50,7 +50,7 @@ Note that in order to conserve total phytoplankton in our domain, it necessary t
 λ = 0.1
 w₀ = 0.05
 
-w_sinking(x, y, z, params) = - params.w₀ * (tanh(z/params.λ) - tanh((-z - 1)/params.λ) - 1)
+w_sinking(x, y, z, params) = - params.w₀ * (tanh(z/params.λ) - tanh((z - 1)/params.λ) - 1)
 
 sinking_velocity = Oceananigans.Fields.FunctionField{Center, Center, Center}(w_sinking, grid; parameters = (; λ, w₀))
 ```
